@@ -16,7 +16,6 @@ public interface IUser {
     //Update
     public void UpdateUser();
     //Ban (Update Status to "Banned")
-    public void BanUser();
    //Delete 
     public void DeleteUser();
 

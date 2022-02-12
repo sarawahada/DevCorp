@@ -26,7 +26,8 @@ public class UserService implements IUser{
        @Override
     public void AddUser(User u) {
         
-        String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`TypeUser`,`StatusUser`) VALUES (?,?,?,?,?,?,?)";
+         String StatusUser = "allowed";
+       String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`TypeUser`,`StatusUser`) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement su = cnx.prepareStatement(Req);
             su.setString(1, u.getNameUser());
@@ -68,13 +69,13 @@ public class UserService implements IUser{
 //UpdateUser
     @Override
             public void UpdateUser(){
-                   String LastNameUser = "kkk";
+ String LastNameUser = "kkk";
  String EmailUser = "lll"; 
  Blob ProfilePicUser=null ; 
  String PasswordUser = "lll"; 
  String TypeUser = "lll"; 
  String StatusUser = "allowed";
- String NameUser = "Lionel";
+ String NameUser = "Mourad";
 
  
         try {
@@ -86,7 +87,7 @@ public class UserService implements IUser{
             statement.setBlob(3, ProfilePicUser);
             statement.setString(4, PasswordUser);
             statement.setString(5, TypeUser);
-            statement.setString(5, StatusUser);
+            statement.setString(6, StatusUser);
             statement.setString(7, NameUser);
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
@@ -96,40 +97,18 @@ public class UserService implements IUser{
                 ex.printStackTrace();
  
         }}
-//BanUser
-         @Override
-            public void BanUser(){
-                String PasswordUser = "123845678"; 
-                String StatusUser = "banned";
 
-  try {
-            String sql = "UPDATE user SET StatusUser=? WHERE PasswordUser!=?";
-
-            PreparedStatement statement = cnx.prepareStatement(sql);
-            statement.setString(1, StatusUser);
-            statement.setString(2, PasswordUser);
-
-
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("User is now banned!");
-            }       }
-        catch (SQLException ex) {
-                ex.printStackTrace();
- 
-        }
-            }
 //DeleteUser
                    @Override
             public void DeleteUser(){
-                     String NameUser = "Lionel"; 
+                     int IdUser = 1; 
 
 
   try {
-            String sql = "Delete FROM user WHERE NameUser=?";
+            String sql = "Delete FROM user WHERE IdUser=?";
 
             PreparedStatement statement = cnx.prepareStatement(sql);
-            statement.setString(1, NameUser);
+            statement.setInt(1, IdUser);
 
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
