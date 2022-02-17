@@ -69,16 +69,6 @@ public class offreservice implements interfaceoffer
     
             public void modifieroffre(){
                 
-             
-    /*String date="31-12-1998";  
-    Date date_offre;  
-        try {
-            date_offre = new SimpleDateFormat("dd-MM-yyyy").parse(date);
-        } catch (ParseException ex) {
-            Logger.getLogger(offreservice.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
- 
-
                 
  String text_offre = "ireie"; 
  String date_offre = "2015-03-31"; 
@@ -95,8 +85,7 @@ public class offreservice implements interfaceoffer
             PreparedStatement st = cnx.prepareStatement(sql);
             st.setString(1,text_offre);
             st.setString(2,date_offre);
-            //st.setDate(2, java.sql.Date.valueOf("2013-09-04"));
-            //st.setTimestamp(2, new java.sql.Timestamp(date.getTime()));
+          
             st.setString(3,type_offre);
             st.setInt(4,id_offre);
             int rowsUpdated = st.executeUpdate();

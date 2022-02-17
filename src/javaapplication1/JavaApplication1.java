@@ -9,7 +9,10 @@ package javaapplication1;
 
 import util.connexion;
 import java.sql.Connection;
+import java.util.List;
+import model.coupouns;
 import model.offre;
+import services.coupounsservice;
 import services.offreservice;
 
 
@@ -25,14 +28,21 @@ public class JavaApplication1 {
     public static void main(String[] args) {
      // TODO code application logic here
      offreservice os = new offreservice();
-     offre o = new offre (245,"sdefeefefe", "02/03/21","ekhdem");
+     coupounsservice cs = new coupounsservice();
+     coupouns c = new coupouns (243, "dfefwff","effefeef");
+     offre o = new offre (255,"sdefeefefe", "02/03/21","ekhdem");
+     //cs.ajoutercoupouns(c);
+     
      //os.ajouteroffre(o);
      
      //Connection cnx =connexion.getInstance().getCnx();
      System.out.print(os.afficheroffre());
+     System.out.print(cs.affichercoupouns());
      
         os.modifieroffre();
         os.supprimeroffre();
+        cs.modifiercoupouns();
+        cs.supprimercoupouns();
         
     }
     

@@ -5,10 +5,16 @@
  */
 package interfaces;
 
+import java.util.List;
+import model.coupouns;
+
 /**
  *
  * @author LENOVO
  */
 public interface interfacecoupouns {
-    
+    public void ajoutercoupouns(coupouns c );
+    public List<coupouns> affichercoupouns();
+   public void modifiercoupouns();
+   public void supprimercoupouns();
 }

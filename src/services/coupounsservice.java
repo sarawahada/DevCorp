@@ -5,10 +5,102 @@
  */
 package services;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import model.coupouns;
+
+import util.connexion;
+
 /**
  *
  * @author LENOVO
  */
 public class coupounsservice {
+     Connection cnx = connexion.getInstance().getCnx();
+     public void ajoutercoupouns(coupouns c  ) {
+        String request = "INSERT INTO `coupouns`(`id_coupouns`, `text_coupouns`, `code_coupouns`) VALUES ('"+c.getId_coupouns()+"','"+c.getText_coupouns()+"','"+c.getCode_coupouns()+"')";
+       try{
+        Statement st = cnx.createStatement();
+        st.executeUpdate(request);
+                System.out.println("coupouns ajoutee avec succes");
+                 } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+      public List<coupouns> affichercoupouns() {
+        List<coupouns> coupoun = new ArrayList<>();
+        
+        String query = "SELECT * FROM coupouns";
+        
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {                
+                coupoun.add(new coupouns(rs.getInt("id_coupouns"), rs.getString("text_coupouns"), rs.getString("code_coupouns")));
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        
+        return coupoun;
+    }
+         public void modifiercoupouns(){
+                
+                
+ String text_coupouns = "dseqdwddww"; 
+ String code_coupouns = "xswjwjjqwi";  
+ int id_coupouns = 223;
+ 
+
     
+        try {
+            
+            
+            String sql = "UPDATE coupouns SET text_coupouns=?, code_coupouns=? WHERE id_coupouns=?";
+
+            PreparedStatement st = cnx.prepareStatement(sql);
+            st.setString(1,text_coupouns);
+            st.setString(2,code_coupouns);
+            st.setInt(3,id_coupouns);
+            int rowsUpdated = st.executeUpdate();
+            
+            if (rowsUpdated > 0) {
+            
+                System.out.println("coupouns est modifiee");
+            }
+                   }
+        catch (SQLException ex) {
+                ex.printStackTrace();
+ 
+        }
+            }
+            
+    public void supprimercoupouns(){
+                     int id_coupouns = 243; 
+
+
+  try {
+            String sql = "Delete FROM coupouns WHERE id_coupouns=?";
+
+            PreparedStatement st = cnx.prepareStatement(sql);
+            st.setInt(1, id_coupouns);
+
+            int rowsUpdated = st.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("coupouns supprimee");
+            }       }
+        catch (SQLException ex) {
+                ex.printStackTrace();
+ 
+        }
+            }
+
 }
