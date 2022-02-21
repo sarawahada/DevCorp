@@ -5,50 +5,57 @@
  */
 
 package model;
-import com.mysql.cj.jdbc.Blob;
+
+
+
+
 
 public class User {
+
     
     //var
+
     private int IdUser;
     private String NameUser;
     private String LastNameUser;
     private String EmailUser;
-    private Blob ProfilePicUser;
+    private String ProfilePicUser;
     private String PasswordUser;
-    private String TypeUser;
-    private String StatusUser;
-
+    private String UserRole;
+    private int UserStatus;
+   
     
     //Constructor
     public User() {
     }
 
-    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, Blob ProfilePicUser,String PasswordUser,String TypeUser,String StatusUser) {
+    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, String ProfilePicUser, String PasswordUser, String UserRole, int UserStatus) {
         this.IdUser = IdUser;
         this.NameUser = NameUser;
         this.LastNameUser = LastNameUser;
         this.EmailUser = EmailUser;
         this.ProfilePicUser = ProfilePicUser;
         this.PasswordUser = PasswordUser;
-        this.TypeUser = TypeUser;
-        this.StatusUser= StatusUser;
-        
+        this.UserRole = UserRole;
+        this.UserStatus = UserStatus;
     }
-  public User( String NameUser, String LastNameUser, String EmailUser, Blob ProfilePicUser,String PasswordUser,String TypeUser,String StatusUser) {
+
+    public User(String NameUser, String LastNameUser, String EmailUser, String ProfilePicUser, String PasswordUser, String UserRole, int UserStatus) {
         this.NameUser = NameUser;
         this.LastNameUser = LastNameUser;
         this.EmailUser = EmailUser;
         this.ProfilePicUser = ProfilePicUser;
         this.PasswordUser = PasswordUser;
-        this.TypeUser = TypeUser;
-        this.StatusUser= StatusUser;
-
-        
+        this.UserRole = UserRole;
+        this.UserStatus = UserStatus;
     }
-  //Getters & Setters
 
-
+    public User(String NameUser, String EmailUser) {
+        this.NameUser = NameUser;
+        this.EmailUser = EmailUser;
+    }
+    
+    //Getters & Setters
     public int getIdUser() {
         return IdUser;
     }
@@ -57,7 +64,7 @@ public class User {
         return NameUser;
     }
 
-    public String getLastNameUser() {
+    public String getLastNameUser() { 
         return LastNameUser;
     }
 
@@ -65,7 +72,7 @@ public class User {
         return EmailUser;
     }
 
-    public Blob getProfilePicUser() {
+    public String getProfilePicUser() {
         return ProfilePicUser;
     }
 
@@ -73,18 +80,17 @@ public class User {
         return PasswordUser;
     }
 
-    public String getTypeUser() {
-        return TypeUser;
+    public String getUserRole() {
+        return UserRole;
     }
-    public String getStatusUser() {
-        return StatusUser;
+
+  
+    public int getUserStatus() {
+        return UserStatus;
     }
 
     public void setIdUser(int IdUser) {
         this.IdUser = IdUser;
-    }
-     public void setStatusUSer(String StatusUser) {
-        this.StatusUser = StatusUser;
     }
 
     public void setNameUser(String NameUser) {
@@ -99,7 +105,7 @@ public class User {
         this.EmailUser = EmailUser;
     }
 
-    public void setProfilePicUser(Blob ProfilePicUser) {
+    public void setProfilePicUser(String ProfilePicUser) {
         this.ProfilePicUser = ProfilePicUser;
     }
 
@@ -107,15 +113,19 @@ public class User {
         this.PasswordUser = PasswordUser;
     }
 
-    public void setTypeUser(String TypeUser) {
-        this.TypeUser = TypeUser;
+    public void setUserRole(String UserRole) {
+        this.UserRole = UserRole;
+    }
+
+    public void setUserStatus(int UserStatus) {
+        this.UserStatus = UserStatus;
     }
     
- 
+
     //Affichage
     @Override
     public String toString() {
-        return "User{" + "IdUser=" + IdUser + ", NameUser=" + NameUser + ", LastNameUser=" + LastNameUser + ", EmailUser=" + EmailUser + ", ProfilePicUser=" + ProfilePicUser +",PasswordUser=" + PasswordUser +",TypeUser=" + TypeUser +",StatusUser=" + StatusUser + '}';
+        return "User{" + "IdUser=" + IdUser + ", NameUser=" + NameUser + ", LastNameUser=" + LastNameUser + ", EmailUser=" + EmailUser + ", ProfilePicUser=" + ProfilePicUser +",PasswordUser=" + PasswordUser +",UserRole=" +UserRole +",UserStatus=" + UserStatus + '}';
     }
 
    

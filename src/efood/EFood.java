@@ -1,57 +1,68 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package efood;
 
 import model.User;
 import services.UserService;
-import model.Admin;
-import services.AdminService;
-import model.Chef;
-import services.ChefService;
-import model.Client;
 import services.ClientService;
-import model.DeliveryGuy;
+import services.ChefService;
 import services.DeliveryGuyService;
+import interfaces.IUser;
+import interfaces.IAdmin;
+import java.sql.SQLException;
+import services.AdminService;
+import util.mail;
 
 public class EFood {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception  {
         // TODO code application logic here
         
         //Personne
-        User u1 = new User("Mourad", "Wahada", "MouradWahada@esprit.tn",null, "12345678","client","allowed");
-        User u2 = new User("Sara", "Wahada", "SaraWahada@esprit.tn",null, "KKKK","admin","allowed");
-        Admin a1 = new Admin();
-        Chef ch1 = new Chef();
-        DeliveryGuy d1 = new DeliveryGuy(); 
-        Client c1 = new Client(); 
-        //Service
-        UserService su = new UserService();
-        AdminService as = new AdminService();
-        ChefService chs = new ChefService();
-        DeliveryGuyService dgs = new DeliveryGuyService();
-        ClientService cs = new ClientService();
-//Ajouter
-       //su.AddUser(u1);
-       //su.AddUser(u2); 
-       //au.AddUser(u1);
-       //cs.AddUser(u2);
+        User u1 = new User("Mourad123", "Wahada", "MouradWahada@esprit.tn","ProfilePic", "lina","client",1);
+        User u2 = new User("Sara222", "Wahada", "SaraWahada@esprit.tn","ProfilePic", "sara","admin",0);
+
+        //Interface
         
+        IUser Iu = new UserService();
+        IAdmin Ia = new AdminService ();
+      
+           //login
+           // Iu.Login("MouradWahada@esprit.tn","lina");
+            //Ajouter
+           // Iu.AddUser(u1,"lina");
+            //Ia.AddUser(u2,"sara");
+            //su.AddUser(u2);
+            //au.AddUser(u1);
+            //cls.AddUser(u2);
+          
+
+            
 //Afficher
-       //System.out.println(su.ShowUser());
-       //System.out.println(au.ShowUser());
-//Modifier
-       //su.UpdateUser();
-       //au.UpdateUser();
+//System.out.println(Iu.ShowUser());
+
+//modify
+ //Iu.UpdateUser(u2);
+ //Iu.UpdateUsername("SaraWahada@esprit.tn","Sara2000");
+ //Iu.UpdatePassword("SaraWahada@esprit.tn","sarasara");
+ //Iu.UpdateProfilePicUser("SaraWahada@esprit.tn", "UpdatedProfilePicture");
+ 
 //ban
+//Ia.BanUser();
 
-     // au.BanUser();
-//Supprimer    
-      //su.DeleteUser();
-     //au.DeleteUser();
+//delete
+//Iu.DeleteUser("MouradWahada@esprit.tn");
+     //mail test  
+//mail.main(args);
+//search user by username 
+//System.out.println(Iu.getUserByNameUser("Mourad123"));
+//search user by mail
+System.out.println(Iu.getUserByMail("SaraWahada@esprit.tn"));
 
-    }
-    
-}
+}}

@@ -5,20 +5,13 @@
         <group>
             <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/efood/EFood.java</file>
             <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/services/AdminService.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/util/maConnexion.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/services/ClientService.java</file>
+            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IAdmin.java</file>
+            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IUser.java</file>
+            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/util/mail.java</file>
             <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/model/Admin.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IDeliveryGuy.java</file>
+            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/util/BCrypt.java</file>
             <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/model/Client.java</file>
             <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/services/UserService.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/model/Chef.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/services/DeliveryGuyService.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IAdmin.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/services/ChefService.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IUser.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IChef.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/interfaces/IClient.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/model/DeliveryGuy.java</file>
             <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/model/User.java</file>
         </group>
     </open-files>
