@@ -26,6 +26,6 @@ public interface interfaceoffer {
     public List<offre> afficheroffre();
     //public void modifieroffre();
     public boolean modifieroffre(offre o);
-    public void supprimeroffre();
+    public void supprimeroffre(int id_offre);
     
 }

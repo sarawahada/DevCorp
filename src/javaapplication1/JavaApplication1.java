@@ -35,7 +35,7 @@ public class JavaApplication1 {
      interfaceoffer os = new offreservice();
      interfacecoupouns cs = new coupounsservice();
      Ipromo ps = new promoservice();
-     coupouns c = new coupouns (76, "coupouns ","effefeef");
+     coupouns c = new coupouns (76, "coupouns ","effef");
      offre o = new offre (298,"oui", "02/04/21","non");
      promo p = new promo (333,"promo",50,"fssfssf","06-05-2019",232223,"dfeecsecvecd");
      //cs.ajoutercoupouns(c);
@@ -49,10 +49,11 @@ public class JavaApplication1 {
      System.out.print(ps.afficherpromo());
        // os.modifieroffre();
        os.modifieroffre(o);
-        os.supprimeroffre();
-        cs.modifiercoupouns();
-        cs.supprimercoupouns();
-        
+        os.supprimeroffre(298);
+        cs.modifiercoupouns(c);
+        cs.supprimercoupouns(76);
+        ps.modifierpromo(p);
+        ps.supprimerpromo(333);
     }
     
 }

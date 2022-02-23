@@ -15,6 +15,7 @@ import model.coupouns;
 public interface interfacecoupouns {
     public void ajoutercoupouns(coupouns c );
     public List<coupouns> affichercoupouns();
-   public void modifiercoupouns();
-   public void supprimercoupouns();
+  // public void modifiercoupouns();
+   public void supprimercoupouns(int id_coupouns);
+   public boolean modifiercoupouns(coupouns c);
 }

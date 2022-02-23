@@ -100,8 +100,8 @@ public class offreservice implements interfaceoffer
  
         } return true;
             }
-                   public void supprimeroffre(){
-                     int id_offre = 245; 
+                   public void supprimeroffre(int id_offre){
+                     //int id_offre = 245; 
 
 
   try {

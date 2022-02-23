@@ -53,12 +53,12 @@ public class coupounsservice implements interfacecoupouns
         
         return coupoun;
     }
-         public void modifiercoupouns(){
+         public boolean modifiercoupouns(coupouns c){
                 
                 
- String text_coupouns = "texttee"; 
- String code_coupouns = "code23432";  
- int id_coupouns = 23;
+ //String text_coupouns = "texttee"; 
+ //String code_coupouns = "code23432";  
+ //int id_coupouns = 23;
  
 
     
@@ -68,9 +68,9 @@ public class coupounsservice implements interfacecoupouns
             String sql = "UPDATE coupouns SET text_coupouns=?, code_coupouns=? WHERE id_coupouns=?";
 
             PreparedStatement st = cnx.prepareStatement(sql);
-            st.setString(1,text_coupouns);
-            st.setString(2,code_coupouns);
-            st.setInt(3,id_coupouns);
+            st.setString(1,c.getCode_coupouns());
+            st.setString(2,c.getText_coupouns());
+            st.setInt(3,c.getId_coupouns());
             int rowsUpdated = st.executeUpdate();
             
             if (rowsUpdated > 0) {
@@ -82,10 +82,11 @@ public class coupounsservice implements interfacecoupouns
                 ex.printStackTrace();
  
         }
+        return true;
             }
             
-    public void supprimercoupouns(){
-                     int id_coupouns = 2; 
+    public void supprimercoupouns(int id_coupouns){
+                     //int id_coupouns = 2; 
 
 
   try {

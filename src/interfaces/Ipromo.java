@@ -17,6 +17,9 @@ public interface Ipromo {
     
     public void ajouterpromo(promo p ) ;
     public List<promo> afficherpromo();
+    public boolean modifierpromo(promo p);
+    public void supprimerpromo(int id_promo);
+    
 
   
 }
