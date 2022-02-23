@@ -7,6 +7,7 @@ package javaapplication1;
 
 
 
+import interfaces.Ipromo;
 import util.connexion;
 import java.sql.Connection;
 import java.util.List;
@@ -14,6 +15,10 @@ import model.coupouns;
 import model.offre;
 import services.coupounsservice;
 import services.offreservice;
+import interfaces.interfacecoupouns;
+import interfaces.interfaceoffer;
+import model.promo;
+import services.promoservice;
 
 
 /**
@@ -27,19 +32,23 @@ public class JavaApplication1 {
      */
     public static void main(String[] args) {
      // TODO code application logic here
-     offreservice os = new offreservice();
-     coupounsservice cs = new coupounsservice();
-     coupouns c = new coupouns (243, "dfefwff","effefeef");
-     offre o = new offre (255,"sdefeefefe", "02/03/21","ekhdem");
+     interfaceoffer os = new offreservice();
+     interfacecoupouns cs = new coupounsservice();
+     Ipromo ps = new promoservice();
+     coupouns c = new coupouns (76, "coupouns ","effefeef");
+     offre o = new offre (298,"oui", "02/04/21","non");
+     promo p = new promo (333,"promo",50,"fssfssf","06-05-2019",232223,"dfeecsecvecd");
      //cs.ajoutercoupouns(c);
      
      //os.ajouteroffre(o);
+     //ps.ajouterpromo(p);
      
      //Connection cnx =connexion.getInstance().getCnx();
      System.out.print(os.afficheroffre());
      System.out.print(cs.affichercoupouns());
-     
-        os.modifieroffre();
+     System.out.print(ps.afficherpromo());
+       // os.modifieroffre();
+       os.modifieroffre(o);
         os.supprimeroffre();
         cs.modifiercoupouns();
         cs.supprimercoupouns();

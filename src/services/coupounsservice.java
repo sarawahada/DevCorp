@@ -13,14 +13,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.coupouns;
-
+import interfaces.interfacecoupouns;
 import util.connexion;
 
 /**
  *
  * @author LENOVO
  */
-public class coupounsservice {
+public class coupounsservice implements interfacecoupouns
+        {
      Connection cnx = connexion.getInstance().getCnx();
      public void ajoutercoupouns(coupouns c  ) {
         String request = "INSERT INTO `coupouns`(`id_coupouns`, `text_coupouns`, `code_coupouns`) VALUES ('"+c.getId_coupouns()+"','"+c.getText_coupouns()+"','"+c.getCode_coupouns()+"')";
@@ -55,9 +56,9 @@ public class coupounsservice {
          public void modifiercoupouns(){
                 
                 
- String text_coupouns = "dseqdwddww"; 
- String code_coupouns = "xswjwjjqwi";  
- int id_coupouns = 223;
+ String text_coupouns = "texttee"; 
+ String code_coupouns = "code23432";  
+ int id_coupouns = 23;
  
 
     
@@ -84,7 +85,7 @@ public class coupounsservice {
             }
             
     public void supprimercoupouns(){
-                     int id_coupouns = 243; 
+                     int id_coupouns = 2; 
 
 
   try {

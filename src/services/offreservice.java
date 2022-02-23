@@ -67,13 +67,13 @@ public class offreservice implements interfaceoffer
         return offres;
     }
     
-            public void modifieroffre(){
+             public boolean modifieroffre(offre o){
                 
                 
- String text_offre = "ireie"; 
- String date_offre = "2015-03-31"; 
- String type_offre = "rjej"; 
- int id_offre = 122;
+ //String text_offre = "ireie"; 
+ //String date_offre = "2015-03-31"; 
+// String type_offre = "rjej"; 
+// int id_offre = 52;
  
 
     
@@ -83,11 +83,11 @@ public class offreservice implements interfaceoffer
             String sql = "UPDATE offre SET text_offre=?, date_offre=?, type_offre=? WHERE id_offre=?";
 
             PreparedStatement st = cnx.prepareStatement(sql);
-            st.setString(1,text_offre);
-            st.setString(2,date_offre);
+            st.setString(1,o.getText_offre());
+            st.setString(2,o.getDate_offre());
           
-            st.setString(3,type_offre);
-            st.setInt(4,id_offre);
+            st.setString(3,o.getType_offre());
+            st.setInt(4,o.getId_offre());
             int rowsUpdated = st.executeUpdate();
             
             if (rowsUpdated > 0) {
@@ -98,10 +98,10 @@ public class offreservice implements interfaceoffer
         catch (SQLException ex) {
                 ex.printStackTrace();
  
-        }
+        } return true;
             }
                    public void supprimeroffre(){
-                     int id_offre = 101; 
+                     int id_offre = 245; 
 
 
   try {

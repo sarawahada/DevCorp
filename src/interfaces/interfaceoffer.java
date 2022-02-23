@@ -24,7 +24,8 @@ public interface interfaceoffer {
     
     //List
     public List<offre> afficheroffre();
-    public void modifieroffre();
+    //public void modifieroffre();
+    public boolean modifieroffre(offre o);
     public void supprimeroffre();
     
 }
