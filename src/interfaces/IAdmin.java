@@ -4,15 +4,19 @@
  */
 package interfaces;
 import java.sql.SQLException;
+import model.User;
 
 /**
  *
  * @author sarawahada
  */
 public interface IAdmin extends IUser {
+    //addAdmin
+    public void AddAdmin(User u,String PasswordUser);
     //ban user
-    public boolean Banned( int UserStatus);
+    //public boolean Banned( int UserStatus);
     //update user role
+    
         public void UpdateRole(String EmailUser, String UserRole) throws SQLException;
     //update user status (banned or allowed)
         public void UpdateUserStatus(int IDUser, int UserStatus ) throws SQLException;

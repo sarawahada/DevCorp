@@ -30,18 +30,22 @@ public class UserService implements IUser{
     @Override
      public boolean Login(String EmailUser, String PasswordUser ) throws Exception  {
         if (!EmailUser.isEmpty() && !PasswordUser.isEmpty() ) {
-            String requete = "SELECT PasswordUser FROM user WHERE EmailUser = '" + EmailUser +"'";
-           //Statement statement = cnx.prepareStatement(sql);
-            //statement.setString(1, PasswordUser);
-            //statement.setString(2, EmailUser);
-            //ResultSet rs = statement.executeQuery();
+            String requete = "SELECT PasswordUser, UserStatus FROM user WHERE EmailUser = '" + EmailUser +"'";      
             Statement s = maConnexion.getInstance().getCnx().createStatement();
             ResultSet rs = s.executeQuery(requete);
                     if (rs.next()){
                         if(BCrypt.checkpw(PasswordUser,rs.getString("PasswordUser")))
-                                {
+                                { 
+                                    if (rs.getInt("UserStatus")==1)
+                                        {                        
                             System.out.println("login success");
                             return true;
+                                        }
+                                
+                                else{ 
+                                    System.out.println("you were banned from using this app check your email for more information");
+                                    return false;
+                                }      
                         }
                     else {
                         System.out.println("Please enter correct Email or Password"); 
@@ -57,14 +61,16 @@ public class UserService implements IUser{
             System.out.println("fill missing infos!");
             return false;
            
-        } 
         }
+        
+        }
+  
        
      //addUser
        @Override
     public void AddUser(User u,String PasswordUser) {
         
-       String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`UserRole`,`UserStatus`) VALUES (?,?,?,?,?,?,?)";
+       String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`UserRole`) VALUES (?,?,?,?,?,?)";
         try {
             String hashedpw = BCrypt.hashpw(PasswordUser, BCrypt.gensalt(12));
             PreparedStatement su = cnx.prepareStatement(Req);
@@ -74,7 +80,6 @@ public class UserService implements IUser{
             su.setString(4,u.getProfilePicUser());
             su.setString(5, hashedpw);
             su.setString(6, u.getUserRole());
-            su.setInt(7, u.getUserStatus());
             su.execute();
             System.out.println("User added!");
         } catch (SQLException ex) {
@@ -162,9 +167,6 @@ public class UserService implements IUser{
              System.out.println("profile picture updated successfully!");
          }
     }
-    
-    
-   
 
 //DeleteUser
                    @Override
@@ -227,7 +229,37 @@ public class UserService implements IUser{
             }
        return u ;
     }
+         //search id by mail
+          @Override
+             public int getIdbyMail(String EmailUser) throws SQLException {
+     
+            PreparedStatement st = cnx.prepareStatement("select IdUser from user where EmailUser=?");
+            st.setString(1, EmailUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            
+        }
+        return 0;
+             }
+             //search id by mail
+
+             @Override
+             public String getRolebyId(int IdUser) throws SQLException {
+     
+            PreparedStatement st = cnx.prepareStatement("select UserRole from user where IdUser=?");
+            st.setInt(1, IdUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getString("UserRole");
+            
+        }
+        return "";
+             }
+
+}
+        
+        
    
             
-            
-}
+

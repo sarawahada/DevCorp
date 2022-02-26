@@ -12,14 +12,29 @@ import util.BCrypt;
  * @author sarawahada
  */
 public class AdminService extends UserService implements IAdmin {
-    //update user
-  @Override
-    public boolean Banned( int UserStatus){
-        if(UserStatus==1){
-            return true;
+     //addUser
+       @Override
+    public void AddAdmin(User u,String PasswordUser) {
+        
+       String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`UserRole`,`UserStatus`) VALUES (?,?,?,?,?,?,?)";
+        try {
+            String hashedpw = BCrypt.hashpw(PasswordUser, BCrypt.gensalt(12));
+            PreparedStatement su = cnx.prepareStatement(Req);
+            su.setString(1, u.getNameUser());
+            su.setString(2, u.getLastNameUser());
+            su.setString(3, u.getEmailUser());
+            su.setString(4,u.getProfilePicUser());
+            su.setString(5, hashedpw);
+            su.setString(6, u.getUserRole());
+            su.setInt(7, u.getUserStatus());
+            su.execute();
+            System.out.println("admin added!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        return false;
-    }
+    
+}
+        //update user
         @Override
             public boolean UpdateUser(User u){
 
