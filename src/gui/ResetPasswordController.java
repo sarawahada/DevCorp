@@ -92,5 +92,17 @@ public class ResetPasswordController implements Initializable {
             alert.showAndWait();
         
     }}
+            @FXML
+    private void back(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+                rec.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("SendMail.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+    }
 
 }

@@ -15,9 +15,9 @@ public interface IUser {
     //List
     public List<User> ShowUser();
     //Update user except status and role
-    public boolean UpdateUser(User u);
+    public boolean UpdateUser(User u,int IdUser);
    //Delete 
-    public void DeleteUser( String EmailUser);
+    public void DeleteUser( int IdUser);
     //login 
     public boolean Login(String NameUser, String PasswordUser)throws Exception;
     //BanUser
@@ -39,4 +39,14 @@ public interface IUser {
      public String getRolebyId(int IdUser) throws SQLException;
      //search mail by id
      public String getMailbyId(int IdUser) throws SQLException;
+     //search name using id
+     public String getNamebyId(int IdUser) throws SQLException;
+     //search last name using id
+     public String getLastNamebyId(int IdUser) throws SQLException;
+      //search status using id
+     public String getStatusbyId(int IdUser) throws SQLException;
+     //search status using id
+     public String getProfilePicbyId(int IdUser) throws SQLException;
+     //search password using mail
+     public String getPasswordbyMail(String EmailUser) throws SQLException; 
 }

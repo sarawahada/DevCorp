@@ -41,6 +41,7 @@ public class SendMailController implements Initializable {
     static String mail;
     
     
+    
     public boolean UserExist (String email) throws SQLException {
     IUser Iu = new UserService();
     if (Iu.getIdbyMail(EmailUser.getText())!=0){
@@ -90,6 +91,18 @@ public class SendMailController implements Initializable {
            
         }
        
+    }
+        @FXML
+    private void back(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+                mailLabel.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("Login.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     }
     
 }

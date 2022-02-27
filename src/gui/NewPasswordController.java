@@ -62,7 +62,6 @@ public class NewPasswordController implements Initializable {
         String newPass = cd.getText();
         IUser Iu = new UserService();
         mailUpdate=SendMailController.mail;
-        //int id = Iu.getIdbyMail(ircc.username);
         Iu.UpdatePassword(mailUpdate, newPass);
         FXMLLoader loader = new FXMLLoader();
         cd.getScene().getWindow().hide();
@@ -74,4 +73,16 @@ public class NewPasswordController implements Initializable {
         prStage.setResizable(false);
         prStage.show();
         }
-    } }
+    }
+            @FXML
+    private void back(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+                cd.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("Login.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+    }}

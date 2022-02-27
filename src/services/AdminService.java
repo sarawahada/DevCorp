@@ -36,7 +36,7 @@ public class AdminService extends UserService implements IAdmin {
 }
         //update user
         @Override
-            public boolean UpdateUser(User u){
+            public boolean UpdateUser(User u,int PasswordUser){
 
         try {
             String cpass=BCrypt.hashpw(u.getPasswordUser(), BCrypt.gensalt(12));

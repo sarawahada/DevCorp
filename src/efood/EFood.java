@@ -26,7 +26,7 @@ public class EFood {
         // TODO code application logic here
         
         //Personne
-        User u1 = new User("Mourad123", "Wahada", "MouradWahada@esprit.tn","ProfilePic", "lina","client",1);
+        User u1 = new User("Mourado", "Wahada", "MouradoWahada@esprit.tn","ProfilePic", "lina","client",1);
         User u2 = new User("Sara222", "Wahada", "SaraWahada@esprit.tn","ProfilePic", "sara","admin",0);
 
         //Interface
@@ -46,10 +46,10 @@ public class EFood {
 
             
 //Afficher
-System.out.println(Iu.ShowUser());
+//System.out.println(Iu.ShowUser());
 
 //modify
- //Iu.UpdateUser(u2);
+ //Iu.UpdateUser(u1,"lina");
  //Iu.UpdateUsername("SaraWahada@esprit.tn","Sara2000");
  //Iu.UpdatePassword("SaraWahada@esprit.tn","sara");
  //Iu.UpdateProfilePicUser("SaraWahada@esprit.tn", "UpdatedProfilePicture");
@@ -66,5 +66,5 @@ System.out.println(Iu.ShowUser());
 //System.out.println(Iu.getUserByMail("SaraWahada@esprit.tn"));
 
 //System.out.println(Iu.getRolebyId(Iu.getIdbyMail("SaraWahada@esprit.tn")));
-
+System.out.println(Iu.getIdbyMail("sara.wahada@esprit.tn"));
 }}

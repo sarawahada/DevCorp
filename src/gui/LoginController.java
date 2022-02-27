@@ -69,6 +69,10 @@ public class LoginController implements Initializable {
     private Hyperlink ForgotpwdButton;
     
     public static int  codem;
+    
+    public static String password;
+    
+    public static String email;
 
   
      public static boolean isValidEmailAddress(String email) {
@@ -96,16 +100,20 @@ public class LoginController implements Initializable {
      @FXML
    private void login(ActionEvent event) throws Exception {
         IUser Iu = new UserService();
-        if (EmailUser.getText().equals("")){
+        
+        email = EmailUser.getText();
+        password = PasswordUser.getText();
+        
+        if (email.equals("")){
         EmailUser.setStyle("-fx-border-color: red");
         }
-        else if(PasswordUser.getText().equals("")) { 
+        else if(password.equals("")) { 
         EmailUser.setStyle("");
         PasswordUser.setStyle("-fx-border-color: red");  
         
         }
-        else if (Iu.Login(EmailUser.getText(), PasswordUser.getText())) {
-                    String Role = Iu.getRolebyId(Iu.getIdbyMail(EmailUser.getText()));
+        else if (Iu.Login(email, password)) {
+                    String Role = Iu.getRolebyId(Iu.getIdbyMail(email));
                   
             switch (Role) {
                 case "client" ->                     {

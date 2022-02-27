@@ -111,7 +111,7 @@ public class UserService implements IUser{
     
 //UpdateUser
     @Override
-            public boolean UpdateUser(User u){
+            public boolean UpdateUser(User u,int IdUser){
 
         try {
             String cpass=BCrypt.hashpw(u.getPasswordUser(), BCrypt.gensalt(12));
@@ -123,7 +123,7 @@ public class UserService implements IUser{
             statement.setString(3, u.getEmailUser());
             statement.setString(4, u.getProfilePicUser());
             statement.setString(5, cpass);
-            statement.setInt(6, u.getIdUser());
+            statement.setInt(6, IdUser);
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("An existing user was updated successfully!");
@@ -170,13 +170,13 @@ public class UserService implements IUser{
 
 //DeleteUser
                    @Override
-            public void DeleteUser(String EmailUser){
+            public void DeleteUser(int IdUser){
                     
   try {
-            String sql = "Delete FROM user WHERE EmailUser=?";
+            String sql = "Delete FROM user WHERE IdUser=?";
 
             PreparedStatement statement = cnx.prepareStatement(sql);
-            statement.setString(1, EmailUser);
+            statement.setInt(1, IdUser);
 
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
@@ -237,9 +237,8 @@ public class UserService implements IUser{
             st.setString(1, EmailUser);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
-            
-        }
+                return rs.getInt("IdUser"); 
+                           }
         return 0;
              }
              //search role by id used to determine role when logging in to determine dashboard to show
@@ -269,5 +268,64 @@ public class UserService implements IUser{
         }
 return "";
 }
+
+    @Override
+    public String getNamebyId(int IdUser) throws SQLException {
+               PreparedStatement st = cnx.prepareStatement("select NameUser from user where IdUser=?");
+            st.setInt(1, IdUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+            return rs.getString("NameUser"); 
+        }
+return "";
              
+}
+        @Override
+    public String getLastNamebyId(int IdUser) throws SQLException {
+               PreparedStatement st = cnx.prepareStatement("select LastNameUser from user where IdUser=?");
+            st.setInt(1, IdUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+            return rs.getString("LastNameUser"); 
+        }
+return "";
+             
+}
+
+    @Override
+    public String getStatusbyId(int IdUser) throws SQLException {
+            PreparedStatement st = cnx.prepareStatement("select UserStatus from user where IdUser=?");
+            st.setInt(1, IdUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+            return rs.getString("UserStatus"); 
+        }
+return "";
+             
+}
+
+    @Override
+    public String getProfilePicbyId(int IdUser) throws SQLException {
+              PreparedStatement st = cnx.prepareStatement("select ProfilePicUser from user where IdUser=?");
+            st.setInt(1, IdUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+            return rs.getString("ProfilePicUser"); 
+        }
+return "";
+    
+}
+        @Override
+    public String getPasswordbyMail(String EmailUser) throws SQLException {
+            PreparedStatement st = cnx.prepareStatement("select PasswordUser from user where EmailUser=?");
+            st.setString(1, EmailUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+            return rs.getString("PasswordUser"); 
+        }
+return "";
+    
+}
+
+    
 }

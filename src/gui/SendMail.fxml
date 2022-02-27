@@ -21,5 +21,6 @@
          </font></Label>
       <TextField fx:id="EmailUser" layoutX="164.0" layoutY="157.0" prefHeight="26.0" prefWidth="279.0" />
       <Button layoutX="219.0" layoutY="220.0" mnemonicParsing="false" onAction="#SendMail" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #007FFF#007FFF #007FFF#007FFF;" text="Next" textFill="WHITE" />
+      <Button layoutX="219.0" layoutY="255.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #007FFF#007FFF #007FFF#007FFF;" text="Back to login page" textFill="WHITE" />
    </children>
 </AnchorPane>
