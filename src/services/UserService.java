@@ -136,22 +136,22 @@ public class UserService implements IUser{
             }
    //Update UserName  
             @Override
-                public void UpdateUsername(String EmailUser, String NameUser) throws SQLException{
+        public void UpdateUsername(String EmailUser, String NameUser) throws SQLException{
         String sql= "UPDATE user SET NameUser='"+ NameUser +"'"+"WHERE EmailUser='"+ EmailUser+"'";
         PreparedStatement statement = cnx.prepareStatement(sql);
-       int rowsUpdated = statement.executeUpdate(sql);
-         if (rowsUpdated > 0) {
+        int rowsUpdated = statement.executeUpdate(sql);
+        if (rowsUpdated > 0) {
              System.out.println("username updated successfully!");
          }
     }
     //Update Password
                 @Override
-    public void UpdatePassword(String EmailUser, String PasswordUser) throws SQLException{
+       public void UpdatePassword(String EmailUser, String PasswordUser) throws SQLException{
        String cpass=BCrypt.hashpw(PasswordUser, BCrypt.gensalt(12));
-        String sql= "UPDATE user SET PasswordUser='"+ cpass +"'"+"WHERE EmailUser='"+ EmailUser+"'";
-        PreparedStatement statement = cnx.prepareStatement(sql);
-      int rowsUpdated = statement.executeUpdate(sql);
-         if (rowsUpdated > 0) {
+       String sql= "UPDATE user SET PasswordUser='"+ cpass +"'"+"WHERE EmailUser='"+ EmailUser+"'";
+       PreparedStatement statement = cnx.prepareStatement(sql);
+       int rowsUpdated = statement.executeUpdate(sql);
+       if (rowsUpdated > 0) {
              System.out.println("password updated successfully!");
          }
     }
@@ -159,9 +159,9 @@ public class UserService implements IUser{
     
   //update profile picture
     @Override
-    public void UpdateProfilePicUser(String EmailUser, String ProfilePicUser) throws SQLException{
+        public void UpdateProfilePicUser(String EmailUser, String ProfilePicUser) throws SQLException{
         String sql= "UPDATE user SET ProfilePicUser='"+ ProfilePicUser +"'"+"WHERE EmailUser='"+ EmailUser+"'";
-       PreparedStatement statement = cnx.prepareStatement(sql);
+        PreparedStatement statement = cnx.prepareStatement(sql);
         int rowsUpdated = statement.executeUpdate(sql);
          if (rowsUpdated > 0) {
              System.out.println("profile picture updated successfully!");
@@ -188,7 +188,7 @@ public class UserService implements IUser{
         }
             }
             
-            //search user by username
+        //search user by username
             @Override
                public User getUserByNameUser(String NameUser) throws SQLException{
         String sql="SELECT * FROM user WHERE NameUser='"+NameUser+"'";
@@ -209,9 +209,9 @@ public class UserService implements IUser{
        return u ;
     }
                
-               //search user by mail
-               @Override
-         public User getUserByMail(String EmailUser) throws SQLException{
+               //search user by mail 
+        @Override
+        public User getUserByMail(String EmailUser) throws SQLException{
         String sql="SELECT * FROM user WHERE EmailUser='"+EmailUser+"'";
         Statement statement = cnx.prepareStatement(sql);
         //statement.executeUpdate(sql);
@@ -229,7 +229,7 @@ public class UserService implements IUser{
             }
        return u ;
     }
-         //search id by mail
+        //search  id by mail used in SendMail to verify that the user has an account
           @Override
              public int getIdbyMail(String EmailUser) throws SQLException {
      
@@ -242,7 +242,7 @@ public class UserService implements IUser{
         }
         return 0;
              }
-             //search id by mail
+             //search role by id used to determine role when logging in to determine dashboard to show
 
              @Override
              public String getRolebyId(int IdUser) throws SQLException {
@@ -257,7 +257,7 @@ public class UserService implements IUser{
         return "";
              }
 
-   //search id by mail
+   //search  mail by id used in SendMail to verify that the user has an account
           @Override
              public String getMailbyId(int IdUser) throws SQLException {
      
@@ -265,15 +265,9 @@ public class UserService implements IUser{
             st.setInt(1, IdUser);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return rs.getString("EmailUser");
-            
+            return rs.getString("EmailUser"); 
         }
 return "";
 }
              
 }
-        
-        
-   
-            
-

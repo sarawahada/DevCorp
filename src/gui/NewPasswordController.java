@@ -5,7 +5,6 @@
 package gui;
 
 
-import static gui.LoginController.codem;
 import interfaces.IUser;
 import java.io.IOException;
 import java.net.URL;
@@ -62,17 +61,14 @@ public class NewPasswordController implements Initializable {
         { 
         String newPass = cd.getText();
         IUser Iu = new UserService();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Login.fxml"));
-        SendMailController sml = loader.getController();
-        mailUpdate=sml.mail;
+        mailUpdate=SendMailController.mail;
         //int id = Iu.getIdbyMail(ircc.username);
         Iu.UpdatePassword(mailUpdate, newPass);
-        FXMLLoader loaderr = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader();
         cd.getScene().getWindow().hide();
         Stage prStage = new Stage();
-        loaderr.setLocation(getClass().getResource("Login.fxml"));
-        Parent root = loaderr.load();
+        loader.setLocation(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
         prStage.setScene(scene);
         prStage.setResizable(false);
