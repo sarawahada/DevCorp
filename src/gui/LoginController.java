@@ -3,7 +3,6 @@ package gui;
 import interfaces.IUser;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -23,18 +23,15 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import services.UserService;
-import services.SendingMail;
 
 
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField EmailUser;
+     TextField EmailUser;
 
     @FXML
     private PasswordField PasswordUser;
-
-
     @FXML
     private Button SignUpButton;
 
@@ -67,14 +64,33 @@ public class LoginController implements Initializable {
   
     @FXML
     private Button LoginButton;
+    
+    @FXML
+    private Hyperlink ForgotpwdButton;
+    
     public static int  codem;
-    
+
   
-    
+     public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();} 
+        catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("NewPassword.fxml"));
+        NewPasswordController ircc = loader.getController();
+        String s="a";
+        if (!ircc.mailUpdate.equals(s)){
+            EmailUser.setText(ircc.mailUpdate);
+        }
     } 
 
      @FXML
@@ -162,39 +178,18 @@ public class LoginController implements Initializable {
     }
     
   
- /*@FXML
-    private void MotpassOubliee(ActionEvent event) throws MessagingException, IOException {
-        //username = EmailUser.getText();
-        IUser Iu = new UserService();
-   		
-        Random r = new Random ();
-      codem =r.nextInt(9999-1000+1);
-      System.out.println(codem);
-                //sc.setCodepass(sc.getIdbymail(t1.getText()), codem);
-
-        //System.out.println(sc.getPassbyId(sc.getIdbymail(t1.getText())));
-        if(isValidEmailAddress(EmailUser.getText())){
-   //     SendMail.send(t1.getText(), sc.getPassbyId(sc.getIdbymail(t1.getText())));
-          SendingMail.send(EmailUser.getText(), codem);
-          FXMLLoader loader = new FXMLLoader();
-        label.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        loader.setLocation(getClass().getResource("Motpasseoublie.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();}
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerte");
-            alert.setHeaderText(null);
-            alert.setContentText("!!! Adresse Email Non Valide !!!");
-            alert.showAndWait();
-        }
-       
-    }*/
+    @FXML
+    private void Forgotpwd(ActionEvent event) throws MessagingException, IOException {
+       FXMLLoader loader = new FXMLLoader();
+                SignUpButton.getScene().getWindow().hide();  
+                Stage prStage =new Stage(); 
+                loader.setLocation(getClass().getResource("SendMail.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
     
-        }    
+        }    }
     
 

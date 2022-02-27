@@ -37,4 +37,6 @@ public interface IUser {
      public int getIdbyMail(String EmailUser) throws SQLException;
       //search role by Id
      public String getRolebyId(int IdUser) throws SQLException;
+     //search mail by id
+     public String getMailbyId(int IdUser) throws SQLException;
 }

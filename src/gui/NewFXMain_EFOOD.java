@@ -26,30 +26,26 @@ public class NewFXMain_EFOOD extends Application {
    
     
     @Override
-    public void start(Stage primaryStage) {
-        try{
+    public void start(Stage primaryStage) throws IOException {
+    
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Login.fxml"));
         Parent root =loader.load();
         Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.setTitle("EFOOD APPLICATION");
-        primaryStage.setScene(scene);
         primaryStage.show();
 
-    }
-        catch (IOException e){
-        }
     }
 
    
     public static void main(String[] args) {
-    launch (args);
+    Application.launch (args);
    
 
-    //LoginController lc = new LoginController();
-    //LoginButton.play();
+
        
-    }}
+    }}/*}}*/
     
 

@@ -90,19 +90,12 @@ public class SignUpClientController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Password Field empty");
         alert.showAndWait();}
-        else if (EmailSignUp.getText().isEmpty() )
-        { 
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
-        alert.setHeaderText(null);
-        alert.setContentText("Email Field Empty");
-        alert.showAndWait();}
         else if(isValidEmailAddress(EmailSignUp.getText())==false)
         {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Alerte");
         alert.setHeaderText(null);
-        alert.setContentText("Email entered is not valid");
+        alert.setContentText("Email is not valid");
         alert.showAndWait();     
         }
           else if (file==null)

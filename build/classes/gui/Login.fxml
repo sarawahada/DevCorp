@@ -23,7 +23,7 @@
                </font>
             </Label>
             <Button id="Login" fx:id="loginButton" layoutX="71.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="211.0" style="-fx-background-color: #007FFF#007FFF;" text="Sign in" textFill="WHITE" />
-            <Hyperlink layoutX="102.0" layoutY="286.0" text="Forgot your password ?" underline="true" />
+            <Hyperlink fx:id="ForgotpwdButton" layoutX="102.0" layoutY="286.0" onAction="#Forgotpwd" text="Forgot your password ?" underline="true" />
             <PasswordField fx:id="PasswordUser" layoutX="86.0" layoutY="243.0" prefHeight="26.0" prefWidth="243.0" />
             <ImageView fitHeight="87.0" fitWidth="82.0" layoutX="137.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                <image>

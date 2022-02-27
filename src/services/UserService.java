@@ -257,6 +257,20 @@ public class UserService implements IUser{
         return "";
              }
 
+   //search id by mail
+          @Override
+             public String getMailbyId(int IdUser) throws SQLException {
+     
+            PreparedStatement st = cnx.prepareStatement("select EmailUser from user where IdUser=?");
+            st.setInt(1, IdUser);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getString("EmailUser");
+            
+        }
+return "";
+}
+             
 }
         
         

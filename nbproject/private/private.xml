@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/gui/ResetPassword.fxml</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/gui/ResetPasswordController.java</file>
-            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/gui/Login.fxml</file>
+            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/gui/LoginController.java</file>
+            <file>file:/Users/sarawahada/NetBeansProjects/EFood/src/gui/NewFXMain_EFOOD.java</file>
         </group>
     </open-files>
 </project-private>
