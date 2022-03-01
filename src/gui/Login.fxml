@@ -17,24 +17,19 @@
             <Image url="@../assets/SignUpBackground.jpeg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="contentContainer" layoutX="338.0" layoutY="13.0" prefHeight="375.0" prefWidth="342.0" style="-fx-background-color: #1f424e#1f424e;">
+      <AnchorPane fx:id="contentContainer" layoutX="338.0" layoutY="13.0" prefHeight="375.0" prefWidth="342.0" style="-fx-background-color: #ffc04d#ffc04d;">
          <children>
-            <TextField fx:id="EmailUser" layoutX="84.0" layoutY="163.0" prefHeight="26.0" prefWidth="243.0" />
-            <Label fx:id="label" layoutX="17.0" layoutY="180.0" text="Email" textFill="#f8f8f8" />
-            <Label fx:id="labelpwd" layoutX="13.0" layoutY="260.0" text="Password" textFill="#f8f8f8" />
-            <Label fx:id="labelSignIn" layoutX="135.0" layoutY="17.0" text="Sign in" textFill="#f8f8f8">
+            <TextField fx:id="EmailUser" layoutX="84.0" layoutY="163.0" prefHeight="26.0" prefWidth="243.0" promptText="Email" />
+            <Label fx:id="label" layoutX="17.0" layoutY="180.0" text="Email" textFill="#f8f8f8" visible="false" />
+            <Label fx:id="labelpwd" layoutX="13.0" layoutY="260.0" text="Password" textFill="#f8f8f8" visible="false" />
+            <Label fx:id="labelSignIn" layoutX="135.0" layoutY="17.0" text="Sign in" textFill="#1f424e">
                <font>
                   <Font size="29.0" />
                </font>
             </Label>
-            <Button id="Login" fx:id="loginButton" layoutX="71.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="211.0" style="-fx-background-color: #007FFF#007FFF;" text="Sign in" textFill="WHITE" />
+            <Button id="Login" fx:id="loginButton" layoutX="71.0" layoutY="319.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="211.0" style="-fx-background-color: #99F599#99F599;" text="Sign in" />
             <Hyperlink fx:id="ForgotpwdButton" layoutX="102.0" layoutY="286.0" onAction="#Forgotpwd" text="Forgot your password ?" underline="true" />
-            <PasswordField fx:id="PasswordUser" layoutX="86.0" layoutY="243.0" prefHeight="26.0" prefWidth="243.0" />
-            <ImageView fitHeight="87.0" fitWidth="82.0" layoutX="137.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/avatar.png" />
-               </image>
-            </ImageView>
+            <PasswordField fx:id="PasswordUser" layoutX="86.0" layoutY="243.0" prefHeight="26.0" prefWidth="243.0" promptText="Password" />
          </children>
       </AnchorPane>
       <Label fx:id="labelContainer" layoutX="110.0" layoutY="14.0" prefHeight="61.0" prefWidth="280.0" text="Welcome to EFOOD " textFill="#1f424e">
@@ -47,7 +42,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="SignUpButton" layoutX="196.0" layoutY="158.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="35.0" prefWidth="109.0" style="-fx-background-color: #007FFF#007FFF;" text="Sign up" textFill="WHITE" />
+      <Button fx:id="SignUpButton" layoutX="196.0" layoutY="158.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="35.0" prefWidth="109.0" style="-fx-background-color: #99F599#99F599;" text="Sign up" />
       <Label fx:id="labelSignUp" layoutX="135.0" layoutY="99.0" text="Join our community by signing up!">
          <font>
             <Font name="System Bold" size="13.0" />

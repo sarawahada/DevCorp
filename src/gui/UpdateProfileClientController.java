@@ -5,6 +5,7 @@
 package gui;
 
 import static gui.LoginController.isValidEmailAddress;
+import static gui.NewPasswordController.mailUpdate;
 import interfaces.IClient;
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +29,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 import model.User;
 import services.ClientService;
+import services.SendingMail;
 
 /**
  * FXML Controller class
@@ -102,7 +105,7 @@ public class UpdateProfileClientController implements Initializable {
     }
     
     @FXML
-    private void Modify(ActionEvent event) throws SQLException, IOException {
+    private void Modify(ActionEvent event) throws SQLException, IOException, MessagingException {
 
         User u = new User();
         u.setNameUser(Name.getText());
@@ -125,6 +128,7 @@ public class UpdateProfileClientController implements Initializable {
         {
         IClient Ic = new ClientService();
         Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
+        SendingMail.sendAccountModified(Email.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
@@ -165,6 +169,7 @@ public class UpdateProfileClientController implements Initializable {
         if(isValidEmailAddress(Email.getText())==true )
         {
         Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
+        SendingMail.sendAccountModified(Email.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);

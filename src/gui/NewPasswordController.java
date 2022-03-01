@@ -23,6 +23,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
+import services.SendingMail;
 
 import services.UserService;
 
@@ -45,7 +47,7 @@ public class NewPasswordController implements Initializable {
     }
 
     @FXML
-    private void Send(ActionEvent event) throws IOException, SQLException {
+    private void Send(ActionEvent event) throws IOException, SQLException, MessagingException {
         if(
             NewPasswordField.getText().isEmpty())
         {   Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -60,6 +62,7 @@ public class NewPasswordController implements Initializable {
         IUser Iu = new UserService();
         mailUpdate=SendMailController.mail;
         Iu.UpdatePassword(mailUpdate, newPass);
+        SendingMail.sendPasswordReset(mailUpdate);
         FXMLLoader loader = new FXMLLoader();
         NewPasswordField.getScene().getWindow().hide();
         Stage prStage = new Stage();

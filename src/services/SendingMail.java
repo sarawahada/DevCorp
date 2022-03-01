@@ -58,4 +58,104 @@ public class SendingMail
             message.setSubject("password reset");
             message.setText(mot+" your verification code");
             return message;
-    }}
+    }
+        public static void sendSignUp(String recepient) throws MessagingException 
+    {
+        System.out.println("Preparing Send email");
+        Properties props = new Properties();
+
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");	
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        String myAccountEmail ="efoodappproject@gmail.com";
+        String password ="EfoodAppPiDEV";
+        Session session = Session.getDefaultInstance(props,new Authenticator() 
+        {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() 
+            {
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+        });
+            Message message = prepareMessageSignUp(session,myAccountEmail,recepient);
+            Transport.send(message);
+            System.out.println("message sent");
+    }
+
+    private static Message prepareMessageSignUp(Session session,String myAccountEmail,String recepient) throws AddressException, MessagingException {
+       
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Account created");
+            message.setText("Welcome to Efood !");
+            return message;
+    }
+         public static void sendPasswordReset(String recepient) throws MessagingException 
+    {
+        System.out.println("Preparing Send email");
+        Properties props = new Properties();
+
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");	
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        String myAccountEmail ="efoodappproject@gmail.com";
+        String password ="EfoodAppPiDEV";
+        Session session = Session.getDefaultInstance(props,new Authenticator() 
+        {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() 
+            {
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+        });
+            Message message = prepareMessagePasswordReset(session,myAccountEmail,recepient);
+            Transport.send(message);
+            System.out.println("message sent");
+    }
+
+    private static Message prepareMessagePasswordReset(Session session,String myAccountEmail,String recepient) throws AddressException, MessagingException {
+       
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Password reset");
+            message.setText("Your password was reset successfully");
+            return message;
+    }
+            public static void sendAccountModified(String recepient) throws MessagingException 
+    {
+        System.out.println("Preparing Send email");
+        Properties props = new Properties();
+
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");	
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        String myAccountEmail ="efoodappproject@gmail.com";
+        String password ="EfoodAppPiDEV";
+        Session session = Session.getDefaultInstance(props,new Authenticator() 
+        {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() 
+            {
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+        });
+            Message message = prepareMessageAccountModified(session,myAccountEmail,recepient);
+            Transport.send(message);
+            System.out.println("message sent");
+    }
+
+    private static Message prepareMessageAccountModified(Session session,String myAccountEmail,String recepient) throws AddressException, MessagingException {
+       
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Account modified ");
+            message.setText("Your account was modified successfully");
+            return message;
+    }
+}

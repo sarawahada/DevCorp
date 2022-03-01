@@ -4,6 +4,7 @@
  */
 package gui;
 
+import static gui.LoginController.codem;
 import static gui.SendMailController.mail;
 import interfaces.IUser;
 import java.io.File;
@@ -27,7 +28,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 import model.User;
+import services.SendingMail;
 import services.UserService;
 
 
@@ -88,7 +91,7 @@ public class SignUpClientController implements Initializable {
            return m.matches();
     }
     @FXML
-         void SignUpClient(ActionEvent event) throws IOException, SQLException {
+         void SignUpClient(ActionEvent event) throws IOException, SQLException, MessagingException {
         
         if(NameUserSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -154,6 +157,7 @@ public class SignUpClientController implements Initializable {
         u.setProfilePicUser(file.toURI().toString());
         UserService us = new UserService();
         us.AddUser(u,PasswordSignUp.getText());
+        SendingMail.sendSignUp(EmailSignUp.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
