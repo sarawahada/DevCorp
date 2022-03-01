@@ -1,0 +1,7 @@
+build/classes/interfaces/IPanier.class
+build/classes/interfaces/IPanierEntry.class
+build/classes/model/Panier.class
+build/classes/model/PanierEntry.class
+build/classes/model/Product.class
+build/classes/services/PanierEntryService.class
+build/classes/services/PanierService.class
