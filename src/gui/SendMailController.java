@@ -12,6 +12,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,13 +44,14 @@ public class SendMailController implements Initializable {
     
     
     
-    public boolean UserExist (String email) throws SQLException {
-    IUser Iu = new UserService();
-    if (Iu.getIdbyMail(EmailUser.getText())!=0){
-        mail=EmailUser.getText();
-        return true;
+    public boolean UserExist (String email) throws SQLException  {
+       
+            IUser Iu = new UserService();
+            if (Iu.getIdbyMail(EmailUser.getText())!=0){
+                mail=EmailUser.getText();
+                return true;
     }
-        return false;
+            return false;
     }
    
     @Override
@@ -57,7 +60,6 @@ public class SendMailController implements Initializable {
     }    
         @FXML
     private void SendMail(ActionEvent event) throws MessagingException, IOException, SQLException {
-        //username = EmailUser.getText();
         IUser Iu = new UserService();
         Random r = new Random ();
         codem =r.nextInt(9999-1000+1);

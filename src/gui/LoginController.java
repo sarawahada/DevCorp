@@ -98,7 +98,7 @@ public class LoginController implements Initializable {
     } 
 
      @FXML
-   private void login(ActionEvent event) throws Exception {
+    private void login(ActionEvent event) throws Exception {
         IUser Iu = new UserService();
         
         email = EmailUser.getText();

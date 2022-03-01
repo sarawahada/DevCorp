@@ -4,9 +4,12 @@
  */
 package gui;
 
+import static gui.SendMailController.mail;
+import interfaces.IUser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
@@ -48,6 +51,9 @@ public class SignUpClientController implements Initializable {
     private PasswordField PasswordSignUp;
     
     @FXML
+    private PasswordField PasswordConfirm;
+    
+    @FXML
     private ImageView imgClient;
 
     @FXML
@@ -57,12 +63,23 @@ public class SignUpClientController implements Initializable {
     private Label SignUpLabel;
     
     File file;
+    
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }  
 
+    public boolean UserExists (String email) throws SQLException  {
+       
+            IUser Iu = new UserService();
+            if (Iu.getIdbyMail(EmailSignUp.getText())!=Iu.getId()){
+                mail=EmailSignUp.getText();
+                return true;
+    }
+            return false;
+    }
   
     public boolean isValidEmailAddress(String email) {
            String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
@@ -71,49 +88,69 @@ public class SignUpClientController implements Initializable {
            return m.matches();
     }
     @FXML
-    void SignUpClient(ActionEvent event) throws IOException {
-   if(NameUserSignUp.getText().isEmpty())
+         void SignUpClient(ActionEvent event) throws IOException, SQLException {
+        
+        if(NameUserSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
+        alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText(" Name Field empty");
         alert.showAndWait();}
         else if (LastNameSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
+        alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Last Name Field empty");
         alert.showAndWait();}
         else if (PasswordSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
+        alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Password Field empty");
         alert.showAndWait();}
         else if(isValidEmailAddress(EmailSignUp.getText())==false)
         {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
+        alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Email is not valid");
         alert.showAndWait();     
         }
-          else if (file==null)
+        else if(isValidEmailAddress(EmailSignUp.getText())==false)
+        {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Email is not valid");
+        alert.showAndWait();     
+        }
+           else if(UserExists(EmailSignUp.getText())==false)
+        {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("email already exists");
+        alert.showAndWait();     
+        }
+          else if (!PasswordConfirm.getText().equals(PasswordSignUp.getText()))
         { 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
+        alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Insert profile picture");
+        alert.setContentText("Password confirmation does not match password");
         alert.showAndWait();
         }
         else
-        {  User u = new User();
+        { 
+        User u = new User();
         u.setUserRole("client");
         u.setUserStatus(1);
         u.setNameUser(NameUserSignUp.getText());
         u.setLastNameUser(LastNameSignUp.getText());
         u.setPasswordUser(PasswordSignUp.getText());
         u.setEmailUser(EmailSignUp.getText());
+        if (this.file==null){
+        File file = new File("src/assets/avatar.png");
         u.setProfilePicUser(file.toURI().toString());
         UserService us = new UserService();
         us.AddUser(u,PasswordSignUp.getText());
@@ -130,8 +167,31 @@ public class SignUpClientController implements Initializable {
         Scene scene = new Scene(root);
         prStage.setScene(scene);
         prStage.setResizable(false);
-        prStage.show();}
-    }
+        prStage.show();
+        }
+        else
+        {
+        u.setProfilePicUser(file.toURI().toString());
+        UserService us = new UserService();
+        us.AddUser(u,PasswordSignUp.getText());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("Account created successfully ");
+        alert.showAndWait();
+        FXMLLoader loader = new FXMLLoader();
+        NameUserSignUp.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
+        }
+            }
+         }
+
       @FXML
     void AddPictureClient(ActionEvent event) {
         FileChooser fileChooserr = new FileChooser();

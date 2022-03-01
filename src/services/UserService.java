@@ -10,13 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 import interfaces.IUser;
-
 import model.User;
 import util.maConnexion;
 import util.BCrypt;
@@ -232,12 +228,22 @@ public class UserService implements IUser{
         //search  id by mail used in SendMail to verify that the user has an account
           @Override
              public int getIdbyMail(String EmailUser) throws SQLException {
-     
             PreparedStatement st = cnx.prepareStatement("select IdUser from user where EmailUser=?");
             st.setString(1, EmailUser);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return rs.getInt("IdUser"); 
+                           }
+        return 0;
+             }
+                      @Override
+             public int getId() throws SQLException  {
+            String sql="SELECT IdUser FROM user ";
+            Statement statement = cnx.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int id =  rs.getInt("IdUser"); 
+                return id;
                            }
         return 0;
              }
@@ -297,9 +303,13 @@ return "";
             PreparedStatement st = cnx.prepareStatement("select UserStatus from user where IdUser=?");
             st.setInt(1, IdUser);
             ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-            return rs.getString("UserStatus"); 
-        }
+            if (rs.next()) { 
+            if( "1".equals(rs.getString("UserStatus"))){
+                return "allowed";
+            } 
+        } else {
+            return "blocked";
+                    }
 return "";
              
 }

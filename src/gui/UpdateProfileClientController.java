@@ -4,7 +4,7 @@
  */
 package gui;
 
-import static gui.LoginController.password;
+import static gui.LoginController.isValidEmailAddress;
 import interfaces.IClient;
 import java.io.File;
 import java.io.IOException;
@@ -48,22 +48,24 @@ public class UpdateProfileClientController implements Initializable {
     @FXML
     private TextField LastName;
     @FXML
-    private TextField Password;
+    private PasswordField Password;
+    @FXML
+    private PasswordField NewPassword;
+    @FXML
+    private PasswordField PasswordConfirm;
     @FXML
     private Button imgLoad;
-    File file;
     @FXML
     private ImageView img;
     @FXML
     private Button Cancel;
     @FXML
     private Button Deactivate;
-    
-     @FXML
+    @FXML
     private Button Modify;
-    /**
-     * Initializes the controller class.
-     */
+    
+    File file;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
@@ -84,15 +86,13 @@ public class UpdateProfileClientController implements Initializable {
             img.setImage(image);
             
         } catch (IOException | SQLException ex) {
-            ex.printStackTrace();
-            
         }
-        
         }
-        @FXML
+    
+    @FXML
     private void imgLoad(ActionEvent event) {
-       FileChooser fileChooserr = new FileChooser();
-        fileChooserr.setTitle("Select PDF files");
+        FileChooser fileChooserr = new FileChooser();
+        fileChooserr.setTitle("Select picture");
         fileChooserr.setInitialDirectory(new File("/"));
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
         fileChooserr.getExtensionFilters().add(imageFilter);
@@ -100,18 +100,29 @@ public class UpdateProfileClientController implements Initializable {
         Image image = new Image(file.toURI().toString());
         img.setImage(image);
     }
+    
     @FXML
-    private void Modify(ActionEvent event) throws SQLException {
+    private void Modify(ActionEvent event) throws SQLException, IOException {
 
         User u = new User();
         u.setNameUser(Name.getText());
         u.setLastNameUser(LastName.getText());
         u.setEmailUser(Email.getText());
+        if (this.file==null){
+        File file = new File("src/assets/avatar.png");
         u.setProfilePicUser(file.toURI().toString());
-        u.setPasswordUser(Password.getText());
+        u.setPasswordUser(NewPassword.getText());
         u.setUserRole("client");
         u.setUserStatus(1);
-        u.setPasswordUser(Password.getText());
+        //u.setPasswordUser(Password.getText());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
+        LoginController Lc = loader.getController();
+        String pwd = Lc.password;
+        if(Password.getText().equals(pwd)){
+        if(PasswordConfirm.getText().equals(NewPassword.getText())){
+        if(isValidEmailAddress(Email.getText())==true)
+        {
         IClient Ic = new ClientService();
         Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -119,7 +130,64 @@ public class UpdateProfileClientController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Profile updated successfully");
         alert.showAndWait();
-
+        
+        }
+        else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Invalid email");
+        alert.showAndWait();
+        }
+        }
+        }
+        else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Verify your password to update your profile");
+        alert.showAndWait(); 
+        }
+        }
+        else{
+        u.setProfilePicUser(file.toURI().toString());
+        u.setPasswordUser(NewPassword.getText());
+        u.setUserRole("client");
+        u.setUserStatus(1);
+        //u.setPasswordUser(Password.getText());
+        IClient Ic = new ClientService();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
+        LoginController Lc = loader.getController();
+        String pwd = Lc.password;
+        if(Password.getText().equals(pwd)){
+        if(PasswordConfirm.getText().equals(NewPassword.getText())){
+        if(isValidEmailAddress(Email.getText())==true )
+        {
+        Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("Profile updated successfully");
+        alert.showAndWait();
+        }
+        else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Invalid email");
+        alert.showAndWait();
+        }
+        }
+        }
+        else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Verify your password to update your profile");
+        alert.showAndWait();    
+        }
+        }
     }
 
     @FXML
@@ -145,13 +213,13 @@ public class UpdateProfileClientController implements Initializable {
       // option != null.
       Optional<ButtonType> option = alert.showAndWait();
  
-      if (option.get() == null) {
-         this.Deactivate.setText("No selection!");
+        if (option.get() == null) {
+        this.Deactivate.setText("No selection!");
       } else if (option.get() == ButtonType.OK) {
        IClient Ic = new ClientService();
         Ic.DeleteUser(Ic.getIdbyMail(Email.getText()));
         Alert alerte = new Alert(Alert.AlertType.INFORMATION);
-        alerte.setTitle("Alerte");
+        alerte.setTitle("Success");
         alerte.setHeaderText(null);
         alerte.setContentText("Your account was permanently deleted");
         alerte.showAndWait();
@@ -168,29 +236,8 @@ public class UpdateProfileClientController implements Initializable {
          
       } else {
          this.Deactivate.setText(".");
-      }
-        /*ServiceClient sc = new ServiceClient();
-        sc.supprimerClient(sc.getIdbymail(email.getText()));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alerte");
-        alert.setHeaderText(null);
-        alert.setContentText("!!! Votre compte a ete supprime !!!");
-        alert.showAndWait();
-        FXMLLoader loader = new FXMLLoader();
-        nom.getScene().getWindow().hide();
-        Stage prStage = new Stage();
-        loader.setLocation(getClass().getResource("login.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        prStage.setScene(scene);
-        prStage.setResizable(false);
-        prStage.show();*/
+      } 
     }
-
-
-
-
-
 }
 
 

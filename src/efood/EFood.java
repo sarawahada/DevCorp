@@ -65,6 +65,8 @@ public class EFood {
 //search user by mail
 //System.out.println(Iu.getUserByMail("SaraWahada@esprit.tn"));
 
-//System.out.println(Iu.getRolebyId(Iu.getIdbyMail("SaraWahada@esprit.tn")));
-System.out.println(Iu.getIdbyMail("sara.wahada@esprit.tn"));
+//System.out.println(Iu.getStatusbyId(Iu.getIdbyMail("SaraWahada@esprit.tn")));
+//System.out.println(Iu.getIdbyMail("sara.wahada@esprit.tn"));
+//System.out.println(Iu.getId());
+//System.out.println(Iu.getUserByNameUser("sara"));
 }}

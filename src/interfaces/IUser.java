@@ -49,4 +49,6 @@ public interface IUser {
      public String getProfilePicbyId(int IdUser) throws SQLException;
      //search password using mail
      public String getPasswordbyMail(String EmailUser) throws SQLException; 
+      //display all users id
+     public int getId() throws SQLException;
 }

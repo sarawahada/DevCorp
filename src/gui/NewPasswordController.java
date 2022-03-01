@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 
 import javafx.scene.control.TextField;
 
@@ -29,10 +30,8 @@ public class NewPasswordController implements Initializable {
 
 
     @FXML
-    private TextField cd;
+    private PasswordField NewPasswordField;
 
-    
-   
     @FXML
     private Button Send;
     
@@ -45,12 +44,10 @@ public class NewPasswordController implements Initializable {
         // TODO
     }
 
-
-    
     @FXML
     private void Send(ActionEvent event) throws IOException, SQLException {
         if(
-            cd.getText().isEmpty())
+            NewPasswordField.getText().isEmpty())
         {   Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alerte");
             alert.setHeaderText(null);
@@ -59,12 +56,12 @@ public class NewPasswordController implements Initializable {
         }
         else
         { 
-        String newPass = cd.getText();
+        String newPass = NewPasswordField.getText();
         IUser Iu = new UserService();
         mailUpdate=SendMailController.mail;
         Iu.UpdatePassword(mailUpdate, newPass);
         FXMLLoader loader = new FXMLLoader();
-        cd.getScene().getWindow().hide();
+        NewPasswordField.getScene().getWindow().hide();
         Stage prStage = new Stage();
         loader.setLocation(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
@@ -77,7 +74,7 @@ public class NewPasswordController implements Initializable {
             @FXML
     private void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-                cd.getScene().getWindow().hide();  
+                NewPasswordField.getScene().getWindow().hide();  
                 Stage prStage =new Stage(); 
                 loader.setLocation(getClass().getResource("Login.fxml"));
                 Parent root = loader.load();
