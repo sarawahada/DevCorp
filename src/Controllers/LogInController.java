@@ -1,106 +1,192 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package Controllers;
 
-import Models.User;
-import Utils.DbUtils;
+import Interfaces.IUser;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import Services.UserService;
 
-/**
- * FXML Controller class
- *
- * @author fomri
- */
-public class LogInController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
-    private TextField emailTextInput;
+    TextField EmailUser;
+
     @FXML
-    private TextField passwordInput;
+    private PasswordField PasswordUser;
     @FXML
-    private Button btnConnect;
+    private Button SignUpButton;
 
-    Connection conn;
-    PreparedStatement preparedStatement;
-    ResultSet resultSet;
+    @FXML
+    private AnchorPane content;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent parent;
- 
+    @FXML
+    private AnchorPane contentContainer;
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private ImageView contentPic;
+
+    @FXML
+    private Label label;
+
+    @FXML
+    private Label labelContainer;
+
+    @FXML
+    private Label labelNoAccount;
+
+    @FXML
+    private Label labelSignIn;
+
+    @FXML
+    private Label labelSignUp;
+
+    @FXML
+    private Label labelpwd;
+
+    @FXML
+    private Button LoginButton;
+
+    @FXML
+    private Hyperlink ForgotpwdButton;
+
+    public static int codem;
+
+    public static String password;
+
+    public static String email;
+
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../Views/NewPassword.fxml"));
+        NewPasswordController ircc = loader.getController();
+        String s = "a";
+        if (!ircc.mailUpdate.equals(s)) {
+            EmailUser.setText(ircc.mailUpdate);
+        }
     }
 
     @FXML
-    private void seConnecter(ActionEvent event) {
+    private void login(ActionEvent event) throws Exception {
+        IUser Iu = new UserService();
 
-        String email = emailTextInput.getText();
-        String passwd = passwordInput.getText();
-        User connectedUser = null;
+        email = EmailUser.getText();
+        password = PasswordUser.getText();
 
-        try {
-            conn = DbUtils.getInstance().getConnection();
-            preparedStatement = conn.prepareStatement("SELECT * from user WHERE email=? and password=?");
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, passwd);
-            resultSet = preparedStatement.executeQuery();
+        if (email.equals("")) {
+            EmailUser.setStyle("-fx-border-color: red");
+        } else if (password.equals("")) {
+            EmailUser.setStyle("");
+            PasswordUser.setStyle("-fx-border-color: red");
 
-            while (resultSet.next()) {
-                connectedUser = new User(Integer.valueOf(resultSet.getString("id")), resultSet.getString("name"), "", resultSet.getString("email"), "", resultSet.getString("password"), resultSet.getString("role"), 0);
+        } else if (Iu.Login(email, password)) {
+            String Role = Iu.getRolebyId(Iu.getIdbyMail(email));
+
+            if ("client".equalsIgnoreCase(Role)) {
+                FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();
+                Stage prStage = new Stage();
+                loader.setLocation(getClass().getResource("../Views/Client.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+            } else if ("chef".equalsIgnoreCase(Role)) {
+                FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();
+                Stage prStage = new Stage();
+                loader.setLocation(getClass().getResource("../Views/ChefDashboard.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+            } else if ("admin".equalsIgnoreCase(Role)) {
+                FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();
+                Stage prStage = new Stage();
+                loader.setLocation(getClass().getResource("../Views/AdminDashboard.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
+            } else if ("delivery_guy".equalsIgnoreCase(Role)) {
+                FXMLLoader loader = new FXMLLoader();
+                label.getScene().getWindow().hide();
+                Stage prStage = new Stage();
+                loader.setLocation(getClass().getResource("../Views/DeliveryDashboard.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                prStage.setScene(scene);
+                prStage.setResizable(false);
+                prStage.show();
             }
 
-            if (connectedUser != null) {
-                switchToMainScence(event, connectedUser); 
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Error Login! try egain");
-                emailTextInput.setText("");
-                passwordInput.setText("");
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage() + "Error");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Password or Email is incorrect");
+            alert.showAndWait();
         }
-
     }
 
-    public void switchToMainScence(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Commande.fxml"));
-        parent = loader.load();
+    @FXML
+    private void SignUp(ActionEvent event) throws IOException {
 
-        CommandeController commandeController = loader.getController();
-        commandeController.setUser(user);
-        //Parent root = FXMLLoader.load(getClass().getResource("../Views/Commande.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.hide();
-        scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+        SignUpButton.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("../Views/SignUp.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
     }
 
+    @FXML
+    private void Forgotpwd(ActionEvent event) throws MessagingException, IOException {
+        FXMLLoader loader = new FXMLLoader();
+        SignUpButton.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("../Views/SendMail.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
+
+    }
 }

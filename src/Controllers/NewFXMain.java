@@ -19,14 +19,22 @@ public class NewFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage)  throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../Views/LogIn.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("../Views/AnotherLogin.fxml")); 
+        Scene scene = new Scene(root); 
         primaryStage.setScene(scene);
-        primaryStage.show();
-        
+        primaryStage.show(); 
         window = primaryStage;
+        
+        
+        /*FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../Views/Login.fxml"));
+        Parent root =loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("EFOOD APPLICATION");
+        primaryStage.show();*/
+        
     }
 
     /**

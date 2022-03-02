@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class maConnexion {
    
     //DB
-    final static String URL = "jdbc:mysql://localhost:8889/EFood";
+    final static String URL = "jdbc:mysql://localhost/EFood";
     final static String USERNAME = "root";
-    final static String PWD = "root";
+    final static String PWD = "";
     
     //var
     //Singleton : 1

@@ -46,7 +46,7 @@ public class PanierService implements IPanier {
 
     @Override
     public void addProduct(String productName, User user) {
-        PanierEntry productEntry = PanierService.getInstance().getCommandeEntries(user).get(productName.toUpperCase());
+        PanierEntry productEntry = Panier.getInstance().getEntries().get(productName.toUpperCase());
         if (productEntry != null) {
             productEntry.increaseQuantity();
             updateEntety(productEntry);
