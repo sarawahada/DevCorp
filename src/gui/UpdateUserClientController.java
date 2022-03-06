@@ -5,7 +5,7 @@
 package gui;
 
 import static gui.LoginController.isValidEmailAddress;
-import static gui.NewPasswordController.mailUpdate;
+import static gui.SendMailController.mail;
 import interfaces.IClient;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +39,7 @@ import services.SendingMail;
  *
  * @author sarawahada
  */
-public class UpdateProfileClientController implements Initializable {
+public class UpdateUserClientController implements Initializable {
 
 
     @FXML
@@ -112,7 +112,12 @@ public class UpdateProfileClientController implements Initializable {
         u.setLastNameUser(LastName.getText());
         u.setEmailUser(Email.getText());
         if (this.file==null){
-        File file = new File("src/assets/avatar.png");
+        IClient Ic = new ClientService();
+       // File file = new File("src/assets/avatar.png");
+        File file = new File(Ic.getProfilePicbyId(Ic.getIdbyMail(mail)));
+        Image image = new Image(file.toString());
+        System.out.println(file.toURI().toString());
+        img.setImage(image);
         u.setProfilePicUser(file.toURI().toString());
         u.setPasswordUser(NewPassword.getText());
         u.setUserRole("client");
@@ -126,7 +131,7 @@ public class UpdateProfileClientController implements Initializable {
         if(PasswordConfirm.getText().equals(NewPassword.getText())){
         if(isValidEmailAddress(Email.getText())==true)
         {
-        IClient Ic = new ClientService();
+        //IClient Ic = new ClientService();
         Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
         SendingMail.sendAccountModified(Email.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

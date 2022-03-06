@@ -9,8 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="351.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateProfileClientController">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="gui.UpdateUserClientController">
+    <children>
       <TextField fx:id="LastName" layoutX="252.0" layoutY="111.0" prefHeight="26.0" prefWidth="258.0" promptText="Last name" />
       <TextField fx:id="Name" layoutX="251.0" layoutY="75.0" prefHeight="26.0" prefWidth="258.0" promptText="Name" />
       <TextField fx:id="Email" editable="false" layoutX="251.0" layoutY="147.0" prefHeight="26.0" prefWidth="258.0" promptText="Email" />
@@ -21,7 +21,7 @@
       </ImageView>
       <Button fx:id="imgLoad" layoutX="60.0" layoutY="235.0" mnemonicParsing="false" onAction="#imgLoad" text="Add picture" />
       <Button fx:id="Modify" layoutX="251.0" layoutY="299.0" mnemonicParsing="false" onAction="#Modify" prefHeight="39.0" prefWidth="258.0" style="-fx-background-color: #007FFF#007FFF #007FFF#007FFF;" text="Confirm" textFill="WHITE" />
-      <Label fx:id="rec" layoutX="280.0" layoutY="29.0" text="Update your profile">
+      <Label fx:id="rec" layoutX="340.0" layoutY="37.0" text="Update " textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>

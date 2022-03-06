@@ -2,8 +2,12 @@
 package services;
 
 import interfaces.IAdmin;
+import java.beans.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.User;
 import util.BCrypt;
 
@@ -36,21 +40,17 @@ public class AdminService extends UserService implements IAdmin {
 }
         //update user
         @Override
-            public boolean UpdateUser(User u,int PasswordUser){
+            public boolean UpdateEmployee(User u,int IdUser){
 
         try {
-            String cpass=BCrypt.hashpw(u.getPasswordUser(), BCrypt.gensalt(12));
-            String sql = "UPDATE user SET NameUser =?, LastNameUser=?, EmailUser=?, ProfilePicUser=?, PasswordUser=?, UserRole=?,UserStatus=? WHERE IdUser=?";
+           
+            String sql = "UPDATE user SET UserRole=?,UserStatus=? WHERE IdUser=?";
 
             PreparedStatement statement = cnx.prepareStatement(sql);
-            statement.setString(1, u.getNameUser());
-            statement.setString(2, u.getLastNameUser());
-            statement.setString(3, u.getEmailUser());
-            statement.setString(4, u.getProfilePicUser());
-            statement.setString(5, cpass);
-            statement.setString(6, u.getUserRole());
-            statement.setInt(7, u.getUserStatus());
-            statement.setInt(8, u.getIdUser());
+
+            statement.setString(1, u.getUserRole());
+            statement.setInt(2, u.getUserStatus());
+            statement.setInt(3, IdUser);
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("An existing user was updated successfully!");
@@ -76,5 +76,24 @@ public class AdminService extends UserService implements IAdmin {
          PreparedStatement statement = cnx.prepareStatement(sql);
         statement.executeUpdate(sql);
     }
- 
+                 @Override
+    public ObservableList<User> GetListUsers() {
+        ObservableList<User> Users = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT IdUser,NameUser,LastNameUser,EmailUser,UserRole,UserStatus FROM user";
+             PreparedStatement statement = cnx.prepareStatement(sql);
+              ResultSet rs = statement.executeQuery(sql);
+            User user;
+            while (rs.next()) {
+                user = new User(rs.getInt("IdUser"), rs.getString("NameUser"), rs.getString("LastNameUser"), rs.getString("EmailUser"),rs.getString("UserRole"),rs.getInt("UserStatus"));
+                Users.add(user);
+            }
+
+        } catch (SQLException ex) {
+            
+        }
+        return Users;
+    }
+
+
 }

@@ -307,9 +307,10 @@ return "";
             if( "1".equals(rs.getString("UserStatus"))){
                 return "allowed";
             } 
-        } else {
+         else if ("0".equals(rs.getString("UserStatus"))){
             return "blocked";
                     }
+            }
 return "";
              
 }

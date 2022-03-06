@@ -100,7 +100,7 @@ public class ClientController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         Name.getScene().getWindow().hide();
         Stage prStage = new Stage();
-        loader.setLocation(getClass().getResource("UpdateProfileClient.fxml"));
+        loader.setLocation(getClass().getResource("UpdateUserClient.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         prStage.setScene(scene);

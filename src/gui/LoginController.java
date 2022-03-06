@@ -29,7 +29,6 @@ public class LoginController implements Initializable {
 
     @FXML
      TextField EmailUser;
-
     @FXML
     private PasswordField PasswordUser;
     @FXML
@@ -112,8 +111,9 @@ public class LoginController implements Initializable {
         PasswordUser.setStyle("-fx-border-color: red");  
         
         }
+   
         else if (Iu.Login(email, password)) {
-                    String Role = Iu.getRolebyId(Iu.getIdbyMail(email));
+            String Role = Iu.getRolebyId(Iu.getIdbyMail(email));
                   
             switch (Role) {
                 case "client" ->                     {
@@ -149,7 +149,7 @@ public class LoginController implements Initializable {
                         prStage.setResizable(false);
                         prStage.show();
                     }
-                case "delivery_guy" ->                 {
+                case "delivery guy" ->                 {
                     FXMLLoader loader = new FXMLLoader();
                     label.getScene().getWindow().hide();
                     Stage prStage = new Stage();
@@ -162,7 +162,16 @@ public class LoginController implements Initializable {
                 }
                 default -> { }
             }
-        } 
+        }
+        
+        else if("blocked".equals(Iu.getStatusbyId(Iu.getIdbyMail(email)))){  
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("you were banned from using this app check your email for more information");
+            alert.showAndWait();
+        }
+         
         else {
            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
@@ -177,7 +186,7 @@ public class LoginController implements Initializable {
      FXMLLoader loader = new FXMLLoader();
                 SignUpButton.getScene().getWindow().hide();  
                 Stage prStage =new Stage(); 
-                loader.setLocation(getClass().getResource("SignUp.fxml"));
+                loader.setLocation(getClass().getResource("SignUpClient.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 prStage.setScene(scene);

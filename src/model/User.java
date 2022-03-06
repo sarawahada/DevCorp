@@ -54,6 +54,18 @@ public class User {
         this.NameUser = NameUser;
         this.EmailUser = EmailUser;
     }
+
+    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, String UserRole, int UserStatus) {
+        this.IdUser = IdUser;
+        this.NameUser = NameUser;
+        this.LastNameUser = LastNameUser;
+        this.EmailUser = EmailUser;
+        this.UserRole = UserRole;
+        this.UserStatus = UserStatus;
+    }
+
+
+    
     
     //Getters & Setters
     public int getIdUser() {

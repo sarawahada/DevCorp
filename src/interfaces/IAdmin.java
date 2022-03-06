@@ -4,6 +4,7 @@
  */
 package interfaces;
 import java.sql.SQLException;
+import javafx.collections.ObservableList;
 import model.User;
 
 /**
@@ -20,5 +21,7 @@ public interface IAdmin extends IUser {
         public void UpdateRole(String EmailUser, String UserRole) throws SQLException;
     //update user status (banned or allowed)
         public void UpdateUserStatus(int IDUser, int UserStatus ) throws SQLException;
+        public ObservableList<User> GetListUsers() ;
+           public boolean UpdateEmployee(User u,int id);
     
 }
