@@ -6,6 +6,8 @@ package gui;
 
 
 import static gui.SendMailController.mail;
+import static gui.SignUpClientController.NameControl;
+import static gui.SignUpClientController.isValidPassword;
 import interfaces.IUser;
 import java.io.File;
 import java.io.IOException;
@@ -106,12 +108,26 @@ public class AddUserController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(" Name Field empty");
         alert.showAndWait();}
+        else if (NameControl(NameUserSignUp.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
         else if (LastNameSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Last Name Field empty");
         alert.showAndWait();}
+         else if (NameControl(LastNameSignUp.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Last name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
         else if (PasswordSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
@@ -126,14 +142,16 @@ public class AddUserController implements Initializable {
         alert.setContentText("Email is not valid");
         alert.showAndWait();     
         }
-        else if(isValidEmailAddress(EmailSignUp.getText())==false)
-        {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        else if (isValidPassword(PasswordSignUp.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
-        alert.setContentText("Email is not valid");
-        alert.showAndWait();     
-        }
+        alert.setContentText("Password must contain at least one digit [0-9].\n" +
+        "at least one lowercase Latin character [a-z].\n" +
+        "at least one uppercase Latin character [A-Z].\n" +
+        "at least one special character like ! @ # & ( ).\n" +
+        "a length of at least 8 characters and a maximum of 20 characters.");
+        alert.showAndWait();}
            else if(UserExists(EmailSignUp.getText())==false)
         {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -153,11 +171,9 @@ public class AddUserController implements Initializable {
         else
         { 
         User u = new User();
-        
         String Role = "";
         if (ComboxRole.getSelectionModel().getSelectedItem() != null){
         Role = ComboxRole.getSelectionModel().getSelectedItem().toString();
-        
         u.setUserRole(Role);
         u.setUserStatus(1);
         u.setNameUser(NameUserSignUp.getText());

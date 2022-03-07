@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,9 +38,6 @@ import services.UserService;
 
 public class SignUpClientController implements Initializable {
     @FXML
-    private Button AddPictureClientButton;
-
-    @FXML
     private Hyperlink BackToLoginButton;
 
     @FXML
@@ -59,11 +58,6 @@ public class SignUpClientController implements Initializable {
     @FXML
     private ImageView imgClient;
 
-    @FXML
-    private Button SignUpClientButton;
-    
-     @FXML
-    private Label SignUpLabel;
     
     File file;
     
@@ -86,9 +80,20 @@ public class SignUpClientController implements Initializable {
   
     public boolean isValidEmailAddress(String email) {
            String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-           java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-           java.util.regex.Matcher m = p.matcher(email);
+           Pattern p = Pattern.compile(ePattern);
+           Matcher m = p.matcher(email);
            return m.matches();
+    }
+  // validate first name
+   public static boolean NameControl( String Name ) {
+      return Name.matches( "[A-Z][a-z]*" );
+   }
+    // validate password
+   public static boolean isValidPassword(String password) {
+       String PASSWORD_PATTERN ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+       Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+       Matcher matcher = pattern.matcher(password);
+       return matcher.matches();
     }
     @FXML
          void SignUpClient(ActionEvent event) throws IOException, SQLException, MessagingException {
@@ -99,26 +104,42 @@ public class SignUpClientController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(" Name Field empty");
         alert.showAndWait();}
+        else if (NameControl(NameUserSignUp.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
         else if (LastNameSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Last Name Field empty");
         alert.showAndWait();}
+         else if (NameControl(LastNameSignUp.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Last name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
         else if (PasswordSignUp.getText().isEmpty())
         { Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Password Field empty");
         alert.showAndWait();}
-        else if(isValidEmailAddress(EmailSignUp.getText())==false)
-        {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        else if (isValidPassword(PasswordSignUp.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
-        alert.setContentText("Email is not valid");
-        alert.showAndWait();     
-        }
+        alert.setContentText("Password must contain at least one digit [0-9].\n" +
+        "at least one lowercase Latin character [a-z].\n" +
+        "at least one uppercase Latin character [A-Z].\n" +
+        "at least one special character like ! @ # & ( ).\n" +
+        "a length of at least 8 characters and a maximum of 20 characters.");
+        alert.showAndWait();}
         else if(isValidEmailAddress(EmailSignUp.getText())==false)
         {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

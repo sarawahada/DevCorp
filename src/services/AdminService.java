@@ -2,7 +2,6 @@
 package services;
 
 import interfaces.IAdmin;
-import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

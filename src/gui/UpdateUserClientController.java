@@ -6,6 +6,8 @@ package gui;
 
 import static gui.LoginController.isValidEmailAddress;
 import static gui.SendMailController.mail;
+import static gui.SignUpClientController.NameControl;
+import static gui.SignUpClientController.isValidPassword;
 import interfaces.IClient;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -91,7 +95,7 @@ public class UpdateUserClientController implements Initializable {
         } catch (IOException | SQLException ex) {
         }
         }
-    
+
     @FXML
     private void imgLoad(ActionEvent event) {
         FileChooser fileChooserr = new FileChooser();
@@ -129,23 +133,47 @@ public class UpdateUserClientController implements Initializable {
         String pwd = Lc.password;
         if(Password.getText().equals(pwd)){
         if(PasswordConfirm.getText().equals(NewPassword.getText())){
-        if(isValidEmailAddress(Email.getText())==true)
+         if (NameControl(Name.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
+         else if (NameControl(LastName.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Last name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
+         else if(isValidEmailAddress(Email.getText())==false)
         {
         //IClient Ic = new ClientService();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Invalid email");
+        alert.showAndWait();
+        }
+          else if (isValidPassword(NewPassword.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Password must contain at least one digit [0-9].\n" +
+        "at least one lowercase Latin character [a-z].\n" +
+        "at least one uppercase Latin character [A-Z].\n" +
+        "at least one special character like ! @ # & ( ).\n" +
+        "a length of at least 8 characters and a maximum of 20 characters.");
+        alert.showAndWait();}
+       
+        else {
         Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
         SendingMail.sendAccountModified(Email.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText("Profile updated successfully");
-        alert.showAndWait();
-        
-        }
-        else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Invalid email");
         alert.showAndWait();
         }
         }
@@ -170,22 +198,50 @@ public class UpdateUserClientController implements Initializable {
         LoginController Lc = loader.getController();
         String pwd = Lc.password;
         if(Password.getText().equals(pwd)){
+            
         if(PasswordConfirm.getText().equals(NewPassword.getText())){
-        if(isValidEmailAddress(Email.getText())==true )
+            
+        if (NameControl(Name.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
+         else if (NameControl(LastName.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Last name can't containt numbers and should start with a capital letter");
+        alert.showAndWait();
+        }
+         else if(isValidEmailAddress(Email.getText())==false)
         {
+        //IClient Ic = new ClientService();
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Invalid email");
+        alert.showAndWait();
+        }
+        else if (isValidPassword(NewPassword.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Password must contain at least one digit [0-9].\n" +
+        "at least one lowercase Latin character [a-z].\n" +
+        "at least one uppercase Latin character [A-Z].\n" +
+        "at least one special character like ! @ # & ( ).\n" +
+        "a length of at least 8 characters and a maximum of 20 characters.");
+        alert.showAndWait();}
+
+        else {
         Ic.UpdateUser(u,Ic.getIdbyMail(Email.getText()));
         SendingMail.sendAccountModified(Email.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText("Profile updated successfully");
-        alert.showAndWait();
-        }
-        else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Invalid email");
         alert.showAndWait();
         }
         }

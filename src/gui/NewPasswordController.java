@@ -5,6 +5,7 @@
 package gui;
 
 
+import static gui.SignUpClientController.isValidPassword;
 import interfaces.IUser;
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +21,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 
-import javafx.scene.control.TextField;
 
 import javafx.stage.Stage;
 import javax.mail.MessagingException;
@@ -51,10 +51,21 @@ public class NewPasswordController implements Initializable {
         if(
             NewPasswordField.getText().isEmpty())
         {   Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerte");
+            alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Field is empty ");
             alert.showAndWait();
+        }
+         else if (isValidPassword(NewPasswordField.getText())==false)
+        { Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Password must contain at least one digit [0-9].\n" +
+        "at least one lowercase Latin character [a-z].\n" +
+        "at least one uppercase Latin character [A-Z].\n" +
+        "at least one special character like ! @ # & ( ).\n" +
+        "a length of at least 8 characters and a maximum of 20 characters.");
+        alert.showAndWait();
         }
         else
         { 
