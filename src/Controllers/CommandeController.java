@@ -54,6 +54,8 @@ public class CommandeController implements Initializable {
     private Pane handPaneMac;
 
     private User user;
+    @FXML
+    private Region navStat;
 
     /**
      * Initializes the controller class.
@@ -78,8 +80,7 @@ public class CommandeController implements Initializable {
         contentPane.setCenter(new PanierView(user).getView());
     }
 
-     @FXML
-    void showCommandes(ActionEvent event) {
+     void showCommandes(ActionEvent event) {
         
 
     }
@@ -89,6 +90,11 @@ public class CommandeController implements Initializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @FXML
+    private void showUserStat(MouseEvent event) throws IOException {
+         contentPane.setCenter(new StatiqueView(user).getView());
     }
 
 }

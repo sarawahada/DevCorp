@@ -38,4 +38,6 @@ public interface IPanier {
     public void validerCommande(User user);
 
     Map<String, PanierEntry> getCommandeEntries(User user);
+
+    public float calculTotaleByCategory(String category);
 }

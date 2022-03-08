@@ -9,15 +9,22 @@ package Models;
  * @author fomri
  */
 public enum Product {
-    BURGER(1,"burger.jpg", 0.55f), SUSHI(2,"sushi.jpg", 0.78f), TACOS(3,"tacos.jpg", 0.56f);
+    BURGER(1,"burger.jpg", 0.55f,"American"), SUSHI(2,"sushi.jpg", 0.78f,"Japanese "), TACOS(3,"tacos.jpg", 0.56f,"Mexican");
     private int id;
     private String imageFile;
     private float price;
+    private String category;
 
-    Product(int id,String imageFile, float price) {
+    Product(int id,String imageFile, float price,String category) {
         this.id = id;
         this.imageFile = imageFile;
         this.price = price;
+        this.category = category;
+    }
+    Product(int id,String imageFile, float price) {
+        this.id = id;
+        this.imageFile = imageFile;
+        this.price = price; 
     }
 
     public String getImageFile() {
@@ -31,6 +38,15 @@ public enum Product {
     public int getId() {
         return id;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
     
 
 }

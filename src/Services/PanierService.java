@@ -98,6 +98,18 @@ public class PanierService implements IPanier {
         return totale;
     }
 
+    public float calculTotaleByCategory(String category) {
+
+        float totale = 0;
+        for (PanierEntry entry : Panier.getInstance().getEntries().values()) {
+            if (category.equalsIgnoreCase(entry.getProduct().getCategory())) {
+                float entryCost = entry.getProduct().getPrice() * entry.getQuantity();
+                totale += entryCost;
+            } 
+        }
+        return totale;
+    }
+
     //get entry by user (entry is the commande who was passed to panier (en cour)
     @Override
     public List<PanierEntry> getEntries(User user) {
@@ -172,7 +184,6 @@ public class PanierService implements IPanier {
 
     }
 
-    
     //Get All entries for admin to make sur he sees all commandes
     @Override
     public Map<String, List<PanierEntry>> getAllEntries() {
@@ -209,10 +220,10 @@ public class PanierService implements IPanier {
                     user = new User(Integer.valueOf(rs1.getString("id")), rs1.getString("name"), "", rs1.getString("email"), "", rs1.getString("password"), rs1.getString("role"), 0);
                 }
                 if (user != null) {
-                allEntries.put(user.getNameUser(), new ArrayList<>(Panier.getInstance().getEntries().values()));
-            }
+                    allEntries.put(user.getNameUser(), new ArrayList<>(Panier.getInstance().getEntries().values()));
+                }
 
-            } 
+            }
             return allEntries;
 
         } catch (SQLException ex) {
@@ -230,8 +241,7 @@ public class PanierService implements IPanier {
         }
         return totale;
     }
-     
-    
+
     public User getUserByName(String name) throws SQLException {
         String sql = "SELECT * FROM user WHERE name='" + name + "'";
         Statement statement = conn.prepareStatement(sql);
@@ -241,8 +251,8 @@ public class PanierService implements IPanier {
         while (rs.next()) {
             u.setIdUser(rs.getInt("id"));
             u.setNameUser(rs.getString("name"));
-            u.setEmailUser(rs.getString("email")); 
-            u.setUserRole(rs.getString("role"));  
+            u.setEmailUser(rs.getString("email"));
+            u.setUserRole(rs.getString("role"));
         }
         return u;
     }
@@ -250,7 +260,7 @@ public class PanierService implements IPanier {
     @Override
     public void validerCommande(User user) {
         try {
-            
+
             conn = DbUtils.getInstance().getConnection();
             //conn = maConnexion.getInstance().getCnx();
             String query = "UPDATE panier set etat = '" + DbUtils.VLIDATED_STATUS + "'  WHERE id_user=" + String.valueOf(user.getIdUser());
@@ -295,7 +305,35 @@ public class PanierService implements IPanier {
     }
     
     
-    
-     
+    public List<PanierEntry> getCommandedEntries(User user) {
+        String productId = "";
+        int quantity;
+        Product product = null;
+
+        try {
+            conn = DbUtils.getInstance().getConnection();
+            //conn = maConnexion.getInstance().getCnx();
+            preparedStatement = conn.prepareStatement("SELECT * from commande c,panier p WHERE c.id_user=p.id_user and c.id_user= ?");
+            preparedStatement.setString(1, String.valueOf(user.getIdUser()));
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                productId = resultSet.getString("id_produit");
+                quantity = Integer.valueOf(resultSet.getString("Quantity"));
+                PreparedStatement ps = conn.prepareStatement("SELECT * from produit WHERE id = ?");
+                ps.setString(1, productId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    product = Product.valueOf(rs.getString("name"));
+                    PanierEntry entry = new PanierEntry(product, quantity);
+                    Panier.getInstance().getEntries().put(rs.getString("name"), entry);
+                }
+            }
+            return new ArrayList<>(Panier.getInstance().getEntries().values());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Panier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ArrayList<>();
+    }
 
 }
