@@ -1621,4 +1621,5 @@ public class SendingMail
             message.setContent(htmlCode ,"text/html");
             return message;
     }
+    
 }

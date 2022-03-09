@@ -113,12 +113,30 @@ public class ChefDashboardController implements Initializable {
     }
 
     @FXML
-    void offers(ActionEvent event) {
+    void offers(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        Name.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("offreList.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
 
     }
 
     @FXML
-    void promotions(ActionEvent event) {
+    void promotions(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        Name.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("promoList.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
 
     }
 
@@ -127,7 +145,16 @@ public class ChefDashboardController implements Initializable {
 
     }
     @FXML
-    void Coupouns(ActionEvent event) {
+    void Coupouns(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        Name.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("coupounList.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+        prStage.setResizable(false);
+        prStage.show();
 
     }
     

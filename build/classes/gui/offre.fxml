@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="532.0" stylesheets="@offre.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OffreController">
+   <children>
+      <ImageView fitHeight="407.0" fitWidth="535.0" layoutY="-4.0">
+         <image>
+            <Image url="@../pica/bk.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="26.0" layoutY="28.0" prefHeight="281.0" prefWidth="147.0" spacing="20.0">
+         <children>
+          
+            <Label text="Offer Name">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="83.0" text="Offer Date:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Offer Type">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="121.0" layoutY="20.0" prefHeight="294.0" prefWidth="246.0" spacing="15.0">
+         <children>
+            <TextField fx:id="tf_nom_offre" promptText="please insert a name" />
+            <DatePicker fx:id="tf_date_offre" prefHeight="25.0" prefWidth="253.0" promptText="please insert a date" />
+            <TextField fx:id="tf_type_offre" promptText="please insert a type" />
+            <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+      <Button fx:id="btn_ajouter_offre" layoutX="408.0" layoutY="44.0" mnemonicParsing="false" onAction="#ajout2" prefHeight="32.0" prefWidth="103.0" styleClass="search-box" stylesheets="@offre.css" text="Add" textFill="#654040">
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font></Button>
+      <Button layoutX="233.0" layoutY="338.0" mnemonicParsing="false" onAction="#image" styleClass="add-btn" text="Add picture" />
+   </children>
+   
+</AnchorPane>

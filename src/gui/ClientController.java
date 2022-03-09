@@ -112,7 +112,17 @@ public class ClientController implements Initializable {
     }
 
     @FXML
-    void offers(ActionEvent event) {
+    void offers(ActionEvent event) throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader();
+        Name.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("offerView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+      prStage.setResizable(false);
+        prStage.show();
 
     }
 
@@ -122,7 +132,19 @@ public class ClientController implements Initializable {
     }
 
     @FXML
-    void promotions(ActionEvent event) {
+    void promotions(ActionEvent event) throws IOException {
+           FXMLLoader loader = new FXMLLoader();
+        Name.getScene().getWindow().hide();
+        Stage prStage = new Stage();
+        loader.setLocation(getClass().getResource("promoView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        prStage.setScene(scene);
+      prStage.setResizable(false);
+        prStage.show();
+
+  
+        
 
     }
 
