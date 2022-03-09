@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="716.0" stylesheets="@offre.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.OffreListController">
+   <children>
+      <ImageView fitHeight="459.0" fitWidth="727.0">
+         <image>
+            <Image url="@../pica/fsds.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="253.0" layoutY="58.0" prefHeight="28.0" prefWidth="106.0" stylesheets="@offre.css" text="offers list" textFill="#fdaf20">
+         <font>
+            <Font name="Century Gothic Bold Italic" size="22.0" />
+         </font></Label>
+      <TableView fx:id="tvoffre" layoutX="69.0" layoutY="129.0" prefHeight="285.0" prefWidth="577.0">
+        <columns>
+          <TableColumn fx:id="col_id_offre" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="col_nom_offre" prefWidth="173.99998474121094" text="Name" />
+            <TableColumn fx:id="col_date_offre" prefWidth="150.66668701171875" text="Date" />
+            <TableColumn fx:id="col_type_offre" prefWidth="176.66665649414062" text="Type" />
+        </columns>
+      </TableView>
+      <Button fx:id="btn_update" layoutX="539.0" layoutY="58.0" mnemonicParsing="false" onAction="#btn_update" prefHeight="27.0" prefWidth="73.0" styleClass="search-button" text="Update">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font></Button>
+      <Button layoutX="471.0" layoutY="59.0" mnemonicParsing="false" onAction="#btn_add" prefHeight="25.0" prefWidth="57.0" styleClass="search-button" stylesheets="@offre.css" text="Add">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font></Button>
+   </children>
+   
+</AnchorPane>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="690.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PromoController">
+    <stylesheets>
+        <URL value="@promo.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="406.0" fitWidth="690.0">
+         <image>
+            <Image url="@../pica/bk.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="14.0" layoutY="58.0" prefHeight="303.0" prefWidth="112.0" spacing="40.0">
+         <children>
+            <Label text="Promotion Name :">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></Label>
+            <Label text="Promotion Type :" />
+            <Label text="Start Date">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font></Label>
+         </children>
+      </VBox>
+      <VBox layoutX="318.0" layoutY="59.0" prefHeight="172.0" prefWidth="100.0" spacing="45.0">
+         <children>
+            <Label text="Finish Date">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></Label>
+            <Label text="Restaurant ID :" />
+            <Label text="Description:" />
+         </children>
+      </VBox>
+      <VBox layoutX="120.0" layoutY="62.0" prefHeight="303.0" prefWidth="176.0" spacing="30.0">
+         <children>
+            <TextField fx:id="nom_promo" promptText="Please insert a name" />
+            <TextField fx:id="type_promo" promptText="Please insert a type" />
+            <DatePicker fx:id="date1_promo" promptText="Please insert a start date" />
+         </children>
+      </VBox>
+      <VBox layoutX="428.0" layoutY="53.0" prefHeight="332.0" prefWidth="202.0" spacing="30.0">
+         <children>
+            <DatePicker fx:id="date2_promo" prefHeight="25.0" prefWidth="232.0" promptText="Please insert a finish Date" />
+            <TextField fx:id="id_resto" promptText="Please insert a resetaurant ID" />
+            <TextArea fx:id="text_promo" prefHeight="172.0" prefWidth="175.0" promptText="Describe your Promotion" />
+         </children>
+      </VBox>
+      <Button fx:id="btn_ajouter_promo" layoutX="288.0" layoutY="329.0" mnemonicParsing="false" onAction="#ajouterpromo" prefHeight="35.0" prefWidth="100.0" styleClass="add-btn" stylesheets="@offre.css" text="Add" />
+   </children>
+</AnchorPane>

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
 
@@ -9,11 +8,20 @@ package model;
  *
  * @author LENOVO
  */
+
+
+/**
+ *
+ * @author LENOVO
+ */
 public class offre {
+
+  
    private int id_offre;
    private String text_offre;
-   private String date_offre;
+   private String  date_offre;
    private String type_offre;
+   private String img_offre;
     public offre(){ }
 
     public offre(int id_offre, String text_offre, String date_offre, String type_offre) {
@@ -22,10 +30,45 @@ public class offre {
         this.date_offre = date_offre;
         this.type_offre = type_offre;
     }
-  
+
+    public offre(String text_offre, String date_offre, String type_offre) {
+        this.text_offre = text_offre;
+        this.date_offre = date_offre;
+        this.type_offre = type_offre;
+    }
+
+    public offre(String text_offre, String date_offre, String type_offre, String img_offre) {
+        this.text_offre = text_offre;
+        this.date_offre = date_offre;
+        this.type_offre = type_offre;
+        this.img_offre = img_offre;
+    }
+
+    public offre(offre o ) {
+        this.id_offre = o.id_offre;
+        this.text_offre = o.text_offre;
+        this.date_offre = o.date_offre;
+        this.type_offre = o.type_offre;
+        this.img_offre = o.img_offre;
+       
+    }
+
+    public offre(int id_offre, String text_offre, String date_offre, String type_offre, String img_offre) {
+        this.id_offre = id_offre;
+        this.text_offre = text_offre;
+        this.date_offre = date_offre;
+        this.type_offre = type_offre;
+        this.img_offre = img_offre;
+    }
+    
+
+    public String getImg_offre() {
+        return img_offre;
+    }
+
+ 
   
    
-
     public int getId_offre() {
         return id_offre;
     }
@@ -50,6 +93,12 @@ public class offre {
         this.date_offre = date_offre;
     }
 
+    public void setImg_offre(String img_offre) {
+        this.img_offre = img_offre;
+    }
+
+   
+
     public String getType_offre() {
         return type_offre;
     }
@@ -60,7 +109,10 @@ public class offre {
 
     @Override
     public String toString() {
-        return "offre{" + "id_offre=" + id_offre + ", text_offre=" + text_offre + ", date_offre=" + date_offre + ", type_offre=" + type_offre + '}';
+        return "offre{" + "id_offre=" + id_offre + ", text_offre=" + text_offre + ", date_offre=" + date_offre + ", type_offre=" + type_offre + ",img_offre=" + img_offre +'}';
     }
+
+    
             
 }
+

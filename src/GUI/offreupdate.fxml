@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="354.0" prefWidth="355.0" stylesheets="@offre.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.OffreupdateController">
+   <children>
+      <ImageView fitHeight="376.0" fitWidth="355.0">
+         <image>
+            <Image url="@../pica/bk.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="55.0" prefHeight="235.0" prefWidth="90.0" spacing="30.0">
+         <children>
+            <Label fx:id="id_label" text="Offer ID:">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></Label>
+            <Label fx:id="name_label" text="Offer Name:">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></Label>
+            <Label fx:id="date_label" text="Offer Date:">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></Label>
+            <Label fx:id="type_label" text="Offer Type :" />
+         </children>
+      </VBox>
+      <VBox layoutX="86.0" layoutY="55.0" prefHeight="200.0" prefWidth="149.0" spacing="20.0">
+         <children>
+            <TextField fx:id="ido" />
+            <TextField fx:id="nameo" />
+            <TextField fx:id="dateo" />
+            <TextField fx:id="typeo" />
+         </children>
+      </VBox>
+      <Button layoutX="262.0" layoutY="55.0" mnemonicParsing="false" onAction="#getoffre" styleClass="add-btn" text="FIND" />
+      <Button layoutX="159.0" layoutY="264.0" mnemonicParsing="false" onAction="#updateoffre" styleClass="add-btn" text="UPDATE" />
+      <Button layoutX="252.0" layoutY="264.0" mnemonicParsing="false" onAction="#deleteoffre" styleClass="add-btn" text="DELETE" />
+   </children>
+   
+</AnchorPane>

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
 
@@ -9,6 +8,7 @@ package model;
  *
  * @author LENOVO
  */
+import javafx.collections.ObservableList;
 public class promo {
     
    private int id_promo;
@@ -31,7 +31,35 @@ public class promo {
         this.id_resto = id_resto;
         this.text_promo = text_promo;
     }
+    
 
+    public promo(String nom_promo, int type_promo, String date_d, String date_f, int id_resto, String text_promo) {
+        this.nom_promo = nom_promo;
+        this.type_promo = type_promo;
+        this.date_d = date_d;
+        this.date_f = date_f;
+        this.id_resto = id_resto;
+        this.text_promo = text_promo;
+    }
+
+    public promo(String nom_promo, String date_d, String date_f, String text_promo) {
+        this.nom_promo = nom_promo;
+        this.date_d = date_d;
+        this.date_f = date_f;
+        this.text_promo = text_promo;
+    }
+ public promo(promo p ) {
+        this.id_promo = p.id_promo;
+        this.nom_promo = p.nom_promo;
+        this.type_promo = p.type_promo;
+        this.date_d = p.date_d;
+        this.date_f = p.date_f;
+        this.id_resto = p.id_resto;
+        this.text_promo = p.text_promo;
+       
+    }
+     
+  
     public int getId_promo() {
         return id_promo;
     }
@@ -94,5 +122,3 @@ public class promo {
     }
    
 }
-  
-
