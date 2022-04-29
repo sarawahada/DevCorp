@@ -1,0 +1,41 @@
+
+
+{% block body %}
+<!-- End Navbar -->
+
+            <h3 class="description">    OUR COUPOUNS</h3>
+            <h1>Coupouns</h1>
+
+            <table class="table">
+                <tbody>
+
+                <tr>
+                    <th>TextCoupouns</th>
+                    <td>{{ coupoun.textCoupouns }}</td>
+                </tr>
+                <tr>
+                    <th>CodeCoupouns</th>
+                    <img src="/public/img/qr-code/625e78bf5397d.png">
+                </tr>
+                <tr>
+                    <th>Date1</th>
+                    <td>{{ coupoun.date1 }}</td>
+                </tr>
+                <tr>
+                    <th>Date2</th>
+                    <td>{{ coupoun.date2 }}</td>
+                </tr>
+                <tr>
+                    <th>IdPromo1</th>
+                    <td>{{ coupoun.idPromo1 }}</td>
+                </tr>
+                <tr>
+                    <th>DureeCoupouns</th>
+                    <td>{{ coupoun.dureeCoupouns }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+{% endblock %}
