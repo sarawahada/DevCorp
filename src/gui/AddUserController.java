@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
@@ -35,6 +37,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.mail.MessagingException;
 import model.User;
+import org.json.JSONArray;
 import services.SendingMail;
 import services.UserService;
 
@@ -65,6 +68,8 @@ public class AddUserController implements Initializable {
 
     @FXML
     private ComboBox<String> ComboxRole;
+    @FXML
+    private CheckBox Agree;
     
     File file;
     
@@ -73,10 +78,10 @@ public class AddUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         List<String> list = new ArrayList<>();
-        list.add("admin");
-        list.add("chef");
-        list.add("delivery guy");
-        list.add("client");
+        list.add("ROLE_ADMIN");
+        list.add("ROLE_CHEF");
+        list.add("ROLE_DELIVERYGUY");
+        list.add("ROLE_USER");
         ObservableList obList = FXCollections.observableList(list);
         ComboxRole.getItems().clear();
         ComboxRole.setItems(obList);
@@ -168,18 +173,30 @@ public class AddUserController implements Initializable {
         alert.setContentText("Password confirmation does not match password");
         alert.showAndWait();
         }
+            else if (null==Agree.selectedProperty())
+        { 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Please agree to our terms");
+        alert.showAndWait();
+        }
         else
         { 
         User u = new User();
-        String Role = "";
+       
+       
         if (ComboxRole.getSelectionModel().getSelectedItem() != null){
-        Role = ComboxRole.getSelectionModel().getSelectedItem().toString();
-        u.setUserRole(Role);
+             
+        String Role = "["+"'"+ComboxRole.getSelectionModel().getSelectedItem().toString()+"'"+"]";
+        JSONArray arrayRole = new JSONArray(Role); 
+        u.setUserRole(arrayRole);
         u.setUserStatus(1);
         u.setNameUser(NameUserSignUp.getText());
         u.setLastNameUser(LastNameSignUp.getText());
         u.setPasswordUser(PasswordSignUp.getText());
         u.setEmailUser(EmailSignUp.getText());
+        u.setAgreed_terms_at(LocalDateTime.now());
         if (this.file==null){
         File file = new File("src/assets/avatar.png");
         u.setProfilePicUser(file.toURI().toString());

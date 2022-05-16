@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="pane"prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.controllerMenu">
+    <children>
+      <FontAwesomeIconView fx:id="boutton_close" glyphName="CLOSE" layoutX="920.0" layoutY="40.0" onMouseClicked="#handleClose" size="20" />
+      <Label layoutX="220.0" layoutY="18.0" prefHeight="21.0" prefWidth="210.0" text="Manage your restaurant with simplicity" textFill="#b9b2b2">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <Pane layoutY="-5.0" prefHeight="76.0" prefWidth="210.0" style="-fx-background-color: #333333;">
+         <children>
+            <FontAwesomeIconView glyphName="FACEBOOK" layoutX="57.0" layoutY="49.0" size="30" wrappingWidth="11.99999451637268" />
+            <Label layoutX="79.0" layoutY="28.0" text="ood World" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Label fx:id="Menu" layoutX="66.0" layoutY="91.0" text="Menu">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/menu1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label fx:id="MenuBack" layoutX="66.0" layoutY="91.0" text="Menu">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/menu1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <VBox fx:id="slide_menu" layoutX="-3.0" layoutY="144.0" prefHeight="121.0" prefWidth="210.0" style="-fx-background-color: #999999;">
+         <children>
+            <Button fx:id="boutton_restaurant1" mnemonicParsing="false" prefHeight="58.0" prefWidth="210.0" stylesheets="@../css/fullpackstyling.css" text="Ajouter Menu">
+               <graphic>
+                  <FontAwesomeIconView glyphName="COFFEE" size="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="boutton_parametre1" mnemonicParsing="false" prefHeight="55.0" prefWidth="210.0" stylesheets="@../css/fullpackstyling.css" text="Affichage">
+               <graphic>
+                  <FontAwesomeIconView glyphName="GEAR" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="panel_menu" layoutY="142.0" prefHeight="458.0" prefWidth="210.0" style="-fx-background-color: #999999;">
+         <children>
+            <Button fx:id="boutton_menu" mnemonicParsing="false" onAction="#openRestaurant" prefHeight="58.0" prefWidth="210.0" stylesheets="@../css/fullpackstyling.css" text="Restaurant">
+               <graphic>
+                  <FontAwesomeIconView glyphName="COFFEE" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <BorderPane layoutX="210.0" layoutY="51.0" prefHeight="549.0" prefWidth="792.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="51.0">
+         <left>
+            <VBox prefHeight="429.0" prefWidth="219.0" styleClass="right-bar" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="43.0" prefWidth="219.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" text="Plat" textFill="#979191">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="19.0" prefWidth="219.0" />
+                  <VBox fx:id="chosenCard" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="320.0" prefWidth="219.0" stylesheets="@../css/style.css">
+                     <children>
+                        <HBox prefHeight="58.0" prefWidth="219.0">
+                           <children>
+                              <Label fx:id="label_name_plat" alignment="CENTER" prefHeight="62.0" prefWidth="111.0" text="Peach" textFill="WHITE">
+                                 <font>
+                                    <Font name="Cambria Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="label_prix_menu" alignment="CENTER" prefHeight="51.0" prefWidth="116.0" text="Prix" textFill="WHITE">
+                                 <font>
+                                    <Font name="Cambria Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <ImageView fx:id="imagePlat" fitHeight="219.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/banana.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <styleClass>
+                        <String fx:value="chosen-fruit-card" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </VBox>
+                  <Pane prefHeight="23.0" prefWidth="219.0" />
+                  <HBox alignment="CENTER" prefHeight="53.0" prefWidth="219.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#boutton_enregistrer" prefHeight="43.0" prefWidth="192.0" styleClass="add-btn" stylesheets="@../css/style.css" text="Gerer Plat" textFill="#908c8c">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="531.0" prefWidth="567.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="571.0">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="75.0" text="Language" textFill="#c3b9b9">
+                           <font>
+                              <Font name="Cambria Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="40.0" prefWidth="60.0" text="English" textFill="#c3b9b9" underline="true">
+                           <font>
+                              <Font name="Cambria Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="40.0" prefWidth="300.0" />
+                        <Label prefHeight="40.0" prefWidth="81.0" text="My Account" textFill="#c3b9b9">
+                           <font>
+                              <Font name="Cambria Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="29.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/ic_cart.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ScrollPane fx:id="scroll" prefHeight="509.0" prefWidth="1035.0" styleClass="transparent" stylesheets="@../css/style.css">
+                           <content>
+                              <GridPane fx:id="grid" prefHeight="10.0" prefWidth="30.0">
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+      <Pane fx:id="panel_gerer_menu" layoutX="-721.0" layoutY="-293.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #999999;">
+         <children>
+            <Label fx:id="id_label_menu" layoutX="15.0" layoutY="14.0" text="ID" textFill="#aba2a2" />
+            <Label layoutX="34.0" layoutY="67.0" text="Nom" />
+            <Label layoutX="29.0" layoutY="149.0" text="Saison" />
+            <TextField fx:id="text_nom_menu" layoutX="255.0" layoutY="62.0" prefHeight="31.0" prefWidth="216.0" promptText="Nom du restaurant" />
+            <TextField fx:id="text_saison_menu" layoutX="255.0" layoutY="144.0" prefHeight="31.0" prefWidth="216.0" promptText="Saison" />
+            <DatePicker fx:id="text_date_permption" layoutX="255.0" layoutY="462.0" prefHeight="31.0" prefWidth="216.0" promptText="Date peremption" />
+            <Label layoutX="25.0" layoutY="231.0" text="Quantite" />
+            <Button layoutX="29.0" layoutY="542.0" mnemonicParsing="false" onAction="#enregistrer_menu" styleClass="add-btn" stylesheets="@../css/style.css" text="Enregistrer" />
+            <Button layoutX="150.0" layoutY="542.0" mnemonicParsing="false" onAction="#rest_from_menu" styleClass="add-btn" stylesheets="@../css/style.css" text="Reset" />
+            <Button layoutX="250.0" layoutY="542.0" mnemonicParsing="false" onAction="#modifier_menu" styleClass="add-btn" stylesheets="@../css/style.css" text="Modifier" />
+            <Button fx:id="boutton_annuler" layoutX="460.0" layoutY="542.0" mnemonicParsing="false" onAction="#annuler_menu" styleClass="add-btn" stylesheets="@../css/style.css" text="Annuler" />
+            <Label layoutX="30.0" layoutY="305.0" text="Prix" />
+            <Label layoutX="512.0" layoutY="316.0" text="image" />
+            <Label layoutX="29.0" layoutY="385.0" text="date mise en mise en rayon" />
+            <Label layoutX="31.0" layoutY="467.0" text="date peremption" />
+            <TextField fx:id="text_quantite_menu" layoutX="255.0" layoutY="226.0" prefHeight="31.0" prefWidth="216.0" promptText="Quantite" />
+            <TextField fx:id="text_prix_menu" layoutX="255.0" layoutY="300.0" prefHeight="31.0" prefWidth="216.0" promptText="Prix" />
+            <DatePicker fx:id="text_date_mise_en_rayon" layoutX="255.0" layoutY="380.0" prefHeight="31.0" prefWidth="216.0" promptText="date mise en rayon" />
+            <Button fx:id="load_image" layoutX="571.0" layoutY="311.0" mnemonicParsing="false" onAction="#load_image" prefHeight="31.0" prefWidth="216.0" styleClass="add-btn" stylesheets="@../css/style.css" text="Load" />
+            <AnchorPane layoutX="520.0" layoutY="44.0" prefHeight="237.0" prefWidth="264.0">
+               <children>
+                  <Rectangle fx:id="rectImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="32.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="547.0" layoutY="411.0" text="Identifiant de Votre Restaurant :" />
+            <TextField fx:id="text_id_restaurant" layoutX="559.0" layoutY="452.0" />
+            <Button layoutX="356.0" layoutY="542.0" mnemonicParsing="false" onAction="#supprimer_menu" styleClass="add-btn" stylesheets="@../css/style.css" text="Supprimer" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

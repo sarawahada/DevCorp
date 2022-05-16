@@ -8,6 +8,7 @@ package interfaces;
 import java.sql.SQLException;
 import java.util.List;
 import model.User;
+import org.json.JSONArray;
 
 public interface IUser {
     //Add
@@ -36,7 +37,7 @@ public interface IUser {
      //search role by mail
      public int getIdbyMail(String EmailUser) throws SQLException;
       //search role by Id
-     public String getRolebyId(int IdUser) throws SQLException;
+     public JSONArray getRolebyId(int IdUser) throws SQLException;
      //search mail by id
      public String getMailbyId(int IdUser) throws SQLException;
      //search name using id

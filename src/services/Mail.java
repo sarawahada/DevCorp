@@ -8,22 +8,9 @@ package services;
  *
  * @author LENOVO
  */
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import model.offre;
-import javax.mail.Session;
-import javax.mail.Message;
-import javax.mail.Transport;
+
 import javax.mail.Authenticator;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.PasswordAuthentication;
+
 import javax.mail.internet.AddressException;
 
 
@@ -174,7 +161,7 @@ public class Mail {
 "													<table class=\"heading_block\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"mso-table-lspace: 0pt; mso-table-rspace: 0pt;\">\n" +
 "														<tr>\n" +
 "															<td style=\"padding-bottom:5px;padding-left:20px;padding-right:20px;padding-top:30px;text-align:center;width:100%;\">\n" +
-"																<h1 style=\"margin: 0; color: #ffffff; direction: ltr; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 31px; font-weight: normal; letter-spacing: normal; line-height: 150%; text-align: right; margin-top: 0; margin-bottom: 0;\"><span style=\"background-color: #008661;\"><strong>&nbsp; MAY DAY DEAL !&nbsp;</strong></span></h1>\n" +
+"																<h1 style=\"margin: 0; color: #ffffff; direction: ltr; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 31px; font-weight: normal; letter-spacing: normal; line-height: 150%; text-align: right; margin-top: 0; margin-bottom: 0;\"><span style=\"background-color: #008661;\"><strong></strong></span></h1>\n" +
 "															</td>\n" +
 "														</tr>\n" +
 "													</table>\n" +

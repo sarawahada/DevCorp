@@ -13,10 +13,10 @@
    <children>
       <ImageView fitHeight="521.0" fitWidth="414.0">
          <image>
-            <Image url="@../pica/bk.png" />
+            <Image url="@../pica/ff.jpg" />
          </image>
       </ImageView>
-      <VBox layoutY="55.0" prefHeight="321.0" prefWidth="108.0" spacing="30.0">
+      <VBox layoutX="52.0" layoutY="55.0" prefHeight="321.0" prefWidth="108.0" spacing="30.0">
          <children>
             <Label fx:id="id_label" text="Coupon ID :">
                <font>
@@ -48,7 +48,7 @@
                </font></Label>
          </children>
       </VBox>
-      <VBox layoutX="114.0" layoutY="55.0" prefHeight="397.0" prefWidth="173.0" spacing="20.0">
+      <VBox layoutX="155.0" layoutY="55.0" prefHeight="397.0" prefWidth="173.0" spacing="20.0">
          <children>
             <TextField fx:id="idc" />
             <TextField fx:id="namec" />
@@ -59,7 +59,7 @@
             <TextField fx:id="duree_c" />
          </children>
       </VBox>
-      <Button layoutX="310.0" layoutY="55.0" mnemonicParsing="false" onAction="#getcoupoun" styleClass="add-btn" text="FIND" />
+      <Button layoutX="340.0" layoutY="55.0" mnemonicParsing="false" onAction="#getcoupoun" styleClass="add-btn" text="FIND" />
       <Button layoutX="115.0" layoutY="481.0" mnemonicParsing="false" onAction="#updatecoupoun" styleClass="add-btn" text="UPDATE" />
       <Button layoutX="207.0" layoutY="480.0" mnemonicParsing="false" onAction="#deletecoupoun" styleClass="add-btn" text="DELETE" />
    </children>

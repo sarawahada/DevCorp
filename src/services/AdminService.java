@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.User;
+import org.json.JSONArray;
 import util.BCrypt;
 
 /**
@@ -28,7 +29,7 @@ public class AdminService extends UserService implements IAdmin {
             su.setString(3, u.getEmailUser());
             su.setString(4,u.getProfilePicUser());
             su.setString(5, hashedpw);
-            su.setString(6, u.getUserRole());
+            su.setString(6, u.getUserRole().toString());
             su.setInt(7, u.getUserStatus());
             su.execute();
             System.out.println("admin added!");
@@ -46,8 +47,8 @@ public class AdminService extends UserService implements IAdmin {
             String sql = "UPDATE user SET UserRole=?,UserStatus=? WHERE IdUser=?";
 
             PreparedStatement statement = cnx.prepareStatement(sql);
-
-            statement.setString(1, u.getUserRole());
+    
+            statement.setString(1, u.getUserRole().toString());
             statement.setInt(2, u.getUserStatus());
             statement.setInt(3, IdUser);
             int rowsUpdated = statement.executeUpdate();
@@ -79,12 +80,14 @@ public class AdminService extends UserService implements IAdmin {
     public ObservableList<User> GetListUsers() {
         ObservableList<User> Users = FXCollections.observableArrayList();
         try {
-            String sql = "SELECT IdUser,NameUser,LastNameUser,EmailUser,UserRole,UserStatus FROM user";
+            String sql = "SELECT IdUser,NameUser,LastNameUser,EmailUser,UserStatus FROM user";
              PreparedStatement statement = cnx.prepareStatement(sql);
               ResultSet rs = statement.executeQuery(sql);
             User user;
+          //   String Role = rs.getString("UserRole");
+        //JSONArray arrayRole = new JSONArray(Role); 
             while (rs.next()) {
-                user = new User(rs.getInt("IdUser"), rs.getString("NameUser"), rs.getString("LastNameUser"), rs.getString("EmailUser"),rs.getString("UserRole"),rs.getInt("UserStatus"));
+                user = new User(rs.getInt("IdUser"), rs.getString("NameUser"), rs.getString("LastNameUser"), rs.getString("EmailUser"),rs.getInt("UserStatus"));
                 Users.add(user);
             }
 

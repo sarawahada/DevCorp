@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import org.json.JSONArray;
 import services.UserService;
 
 
@@ -80,43 +81,44 @@ public class LoginController implements Initializable {
         }
    
         else if (Iu.Login(email, password)) {
-            String Role = Iu.getRolebyId(Iu.getIdbyMail(email));
-                  
-            switch (Role) {
-                case "client" ->                     {
-                        FXMLLoader loader = new FXMLLoader();
-                        label.getScene().getWindow().hide();
-                        Stage prStage = new Stage();
-                        loader.setLocation(getClass().getResource("Client.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-                        prStage.setScene(scene);
-                        prStage.setResizable(false);
-                        prStage.show();
+            
+            JSONArray Role = Iu.getRolebyId(Iu.getIdbyMail(email));
+             String UserRole =Role.toString();
+                if (null!=UserRole)switch (UserRole) {   
+                case "[\"ROLE_USER\"]"-> {
+                    FXMLLoader loader = new FXMLLoader();
+                    label.getScene().getWindow().hide();
+                    Stage prStage = new Stage();
+                    loader.setLocation(getClass().getResource("Client.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    prStage.setScene(scene);
+                    prStage.setResizable(false);
+                    prStage.show();
                     }
-                case "chef" ->                     {
-                        FXMLLoader loader = new FXMLLoader();
-                        label.getScene().getWindow().hide();
-                        Stage prStage = new Stage();
-                        loader.setLocation(getClass().getResource("ChefDashboard.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-                        prStage.setScene(scene);
-                        prStage.setResizable(false);
-                        prStage.show();
+                case "[\"ROLE_CHEF\"]"-> {
+                    FXMLLoader loader = new FXMLLoader();
+                    label.getScene().getWindow().hide();
+                    Stage prStage = new Stage();
+                    loader.setLocation(getClass().getResource("ChefDashboard.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    prStage.setScene(scene);
+                    prStage.setResizable(false);
+                    prStage.show();
                     }
-                case "admin" ->                     {
-                        FXMLLoader loader = new FXMLLoader();
-                        label.getScene().getWindow().hide();
-                        Stage prStage = new Stage();
-                        loader.setLocation(getClass().getResource("AdminDashboard.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-                        prStage.setScene(scene);
-                        prStage.setResizable(false);
-                        prStage.show();
+                case "[\"ROLE_ADMIN\"]" -> {
+                    FXMLLoader loader = new FXMLLoader();
+                    label.getScene().getWindow().hide();
+                    Stage prStage = new Stage();
+                    loader.setLocation(getClass().getResource("AdminDashboard.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    prStage.setScene(scene);
+                    prStage.setResizable(false);
+                    prStage.show();
                     }
-                case "delivery guy" ->                 {
+                case "[\"ROLE_DELIVERYGUY\"]" -> {
                     FXMLLoader loader = new FXMLLoader();
                     label.getScene().getWindow().hide();
                     Stage prStage = new Stage();
@@ -126,9 +128,12 @@ public class LoginController implements Initializable {
                     prStage.setScene(scene);
                     prStage.setResizable(false);
                     prStage.show();
+                    }
+                default -> {
                 }
-                default -> { }
             }
+             
+            
         }
         
         else if("blocked".equals(Iu.getStatusbyId(Iu.getIdbyMail(email)))){  

@@ -6,6 +6,9 @@
 
 package model;
 
+import java.time.LocalDateTime;
+import org.json.JSONArray;
+
 
 
 
@@ -21,15 +24,16 @@ public class User {
     private String EmailUser;
     private String ProfilePicUser;
     private String PasswordUser;
-    private String UserRole;
     private int UserStatus;
+    private JSONArray UserRole;
+    private LocalDateTime agreed_terms_at;
    
     
     //Constructor
     public User() {
     }
 
-    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, String ProfilePicUser, String PasswordUser, String UserRole, int UserStatus) {
+    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, String ProfilePicUser, String PasswordUser, JSONArray UserRole, int UserStatus) {
         this.IdUser = IdUser;
         this.NameUser = NameUser;
         this.LastNameUser = LastNameUser;
@@ -40,7 +44,7 @@ public class User {
         this.UserStatus = UserStatus;
     }
 
-    public User(String NameUser, String LastNameUser, String EmailUser, String ProfilePicUser, String PasswordUser, String UserRole, int UserStatus) {
+    public User(String NameUser, String LastNameUser, String EmailUser, String ProfilePicUser, String PasswordUser, JSONArray UserRole, int UserStatus) {
         this.NameUser = NameUser;
         this.LastNameUser = LastNameUser;
         this.EmailUser = EmailUser;
@@ -55,7 +59,7 @@ public class User {
         this.EmailUser = EmailUser;
     }
 
-    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, String UserRole, int UserStatus) {
+    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser, JSONArray UserRole, int UserStatus) {
         this.IdUser = IdUser;
         this.NameUser = NameUser;
         this.LastNameUser = LastNameUser;
@@ -92,11 +96,10 @@ public class User {
         return PasswordUser;
     }
 
-    public String getUserRole() {
+    public JSONArray getUserRole() {
         return UserRole;
     }
 
-  
     public int getUserStatus() {
         return UserStatus;
     }
@@ -125,13 +128,32 @@ public class User {
         this.PasswordUser = PasswordUser;
     }
 
-    public void setUserRole(String UserRole) {
-        this.UserRole = UserRole;
+    public void setUserRole(JSONArray roleJson) {
+        this.UserRole = roleJson;
     }
 
     public void setUserStatus(int UserStatus) {
         this.UserStatus = UserStatus;
     }
+
+    public LocalDateTime getAgreed_terms_at() {
+        return agreed_terms_at;
+    }
+
+    public void setAgreed_terms_at(LocalDateTime agreed_terms_at) {
+        this.agreed_terms_at = agreed_terms_at;
+    }
+
+    public User(int IdUser, String NameUser, String LastNameUser, String EmailUser,  int UserStatus) {
+        this.IdUser = IdUser;
+        this.NameUser = NameUser;
+        this.LastNameUser = LastNameUser;
+        this.EmailUser = EmailUser;
+ 
+        this.UserStatus = UserStatus;
+    }
+
+ 
     
 
     //Affichage

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import interfaces.IUser;
 import model.User;
+import org.json.JSONArray;
 import util.maConnexion;
 import util.BCrypt;
 
@@ -22,6 +23,7 @@ public class UserService implements IUser{
     
     //var
     Connection cnx = maConnexion.getInstance().getCnx();
+    
 
     @Override
      public boolean Login(String EmailUser, String PasswordUser ) throws Exception  {
@@ -66,20 +68,21 @@ public class UserService implements IUser{
        @Override
     public void AddUser(User u,String PasswordUser) {
         
-       String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`UserRole`) VALUES (?,?,?,?,?,?)";
+       String Req = "INSERT INTO `user`(`NameUser`, `LastNameUser`, `EmailUser`, `ProfilePicUser`,`PasswordUser`,`UserRole`,`agreed_terms_at`) VALUES (?,?,?,?,?,?,?)";
         try {
-            String hashedpw = BCrypt.hashpw(PasswordUser, BCrypt.gensalt(12));
+            String hashedpw = BCrypt.hashpw(PasswordUser, BCrypt.gensalt(13));
             PreparedStatement su = cnx.prepareStatement(Req);
             su.setString(1, u.getNameUser());
             su.setString(2, u.getLastNameUser());
             su.setString(3, u.getEmailUser());
             su.setString(4,u.getProfilePicUser());
             su.setString(5, hashedpw);
-            su.setString(6, u.getUserRole());
+            su.setString(6, u.getUserRole().toString());
+            su.setString(7, u.getAgreed_terms_at().toString());
             su.execute();
             System.out.println("User added!");
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            
         }
     
 }
@@ -93,8 +96,10 @@ public class UserService implements IUser{
         try {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(query);
+           String Role = rs.getString(7);
+          JSONArray arrayRole = new JSONArray(Role); 
             while (rs.next()) {                
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8)));
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),arrayRole,rs.getInt(8)));
             }
             
         } catch (SQLException ex) {
@@ -187,18 +192,22 @@ public class UserService implements IUser{
         //search user by username
             @Override
                public User getUserByNameUser(String NameUser) throws SQLException{
+           
+       
         String sql="SELECT * FROM user WHERE NameUser='"+NameUser+"'";
         Statement statement = cnx.prepareStatement(sql);
         //statement.executeUpdate(sql);
         ResultSet rs = statement.executeQuery(sql);
         User u = new User();
+        String Role = rs.getString("UserRole");
+        JSONArray arrayRole = new JSONArray(Role); 
        while(rs.next()){
                 u.setIdUser(rs.getInt("IDUser"));
                 u.setNameUser(rs.getString("NameUser"));
                 u.setLastNameUser(rs.getString("LastNameUser")); 
                 u.setEmailUser(rs.getString("EmailUser"));
                 u.setProfilePicUser(rs.getString("ProfilePicUser"));
-                u.setUserRole(rs.getString("UserRole"));
+                u.setUserRole(arrayRole);
                 u.setUserStatus(rs.getInt("UserStatus")); 
                
             }
@@ -213,13 +222,15 @@ public class UserService implements IUser{
         //statement.executeUpdate(sql);
         ResultSet rs = statement.executeQuery(sql);
         User u = new User();
+         String Role = rs.getString("UserRole");
+        JSONArray arrayRole = new JSONArray(Role); 
        while(rs.next()){
                 u.setIdUser(rs.getInt("IDUser"));
                 u.setNameUser(rs.getString("NameUser"));
                 u.setLastNameUser(rs.getString("LastNameUser")); 
                 u.setEmailUser(rs.getString("EmailUser"));
                 u.setProfilePicUser(rs.getString("ProfilePicUser"));
-                u.setUserRole(rs.getString("UserRole"));
+                u.setUserRole(arrayRole);
                 u.setUserStatus(rs.getInt("UserStatus")); 
                
             }
@@ -250,16 +261,21 @@ public class UserService implements IUser{
              //search role by id used to determine role when logging in to determine dashboard to show
 
              @Override
-             public String getRolebyId(int IdUser) throws SQLException {
+             public JSONArray getRolebyId(int IdUser) throws SQLException {
      
             PreparedStatement st = cnx.prepareStatement("select UserRole from user where IdUser=?");
+
+          
             st.setInt(1, IdUser);
             ResultSet rs = st.executeQuery();
+             
             if (rs.next()) {
-                return rs.getString("UserRole");
+                String Role = rs.getString("UserRole");
+                JSONArray arrayRole = new JSONArray(Role);
+                return arrayRole;
             
         }
-        return "";
+        return null;
              }
 
    //search  mail by id used in SendMail to verify that the user has an account

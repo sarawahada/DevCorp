@@ -34,6 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.mail.MessagingException;
 import model.User;
+import org.json.JSONArray;
 import services.AdminService;
 import services.SendingMail;
 
@@ -132,10 +133,11 @@ public class AdminDashboardController implements Initializable {
         if (StatusCombo.getSelectionModel().getSelectedItem() != null){
         int UserStatus = Integer.valueOf(StatusCombo.getSelectionModel().getSelectedItem().toString());
         u.setUserStatus(UserStatus);
-        String UserRole = "";
+       
         if (ComboxRole.getSelectionModel().getSelectedItem() != null){
-        UserRole = ComboxRole.getSelectionModel().getSelectedItem();
-        u.setUserRole(UserRole);
+        String UserRole = "["+"'"+ComboxRole.getSelectionModel().getSelectedItem()+"'"+"]";
+        JSONArray arrayRole = new JSONArray(UserRole); 
+        u.setUserRole(arrayRole);
         IAdmin Ia = new AdminService();
         Ia.UpdateEmployee(u,Ia.getIdbyMail(EmailInput.getText()));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -189,7 +191,7 @@ public class AdminDashboardController implements Initializable {
      return true; // Filter matches Name
     } else if (person.getLastNameUser().toLowerCase().contains(lowerCaseFilter)) {
      return true; // Filter matches LastName
-    }else if (person.getUserRole().toLowerCase().contains(lowerCaseFilter)) {
+    }else if (person.getUserRole().toString().toLowerCase().contains(lowerCaseFilter)) {
      return true; // Filter matches role
     }
     
@@ -219,10 +221,10 @@ public class AdminDashboardController implements Initializable {
        GetListUsers();
       search_user();
         List<String> list = new ArrayList<>();
-        list.add("admin");
-        list.add("chef");
-        list.add("delivery guy");
-        list.add("client");
+        list.add("ROLE_ADMIN");
+        list.add("ROLE_CHEF");
+        list.add("ROLE_DELIVERYGUY");
+        list.add("ROLE_USER");
         ObservableList obList = FXCollections.observableList(list);
         ComboxRole.getItems().clear();
         ComboxRole.setItems(obList);

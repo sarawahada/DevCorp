@@ -33,6 +33,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.mail.MessagingException;
 import model.User;
+import org.json.JSONArray;
 import services.ClientService;
 import services.SendingMail;
 
@@ -122,7 +123,8 @@ public class UpdateUserClientController implements Initializable {
         img.setImage(image);
         u.setProfilePicUser(file.toURI().toString());
         u.setPasswordUser(NewPassword.getText());
-        u.setUserRole(Ic.getRolebyId(Ic.getIdbyMail(mail)));
+        JSONArray Role =Ic.getRolebyId(Ic.getIdbyMail(mail));
+        u.setUserRole(Role);
         u.setUserStatus(1);
         //u.setPasswordUser(Password.getText());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
@@ -187,7 +189,9 @@ public class UpdateUserClientController implements Initializable {
         else{
         u.setProfilePicUser(file.toURI().toString());
         u.setPasswordUser(NewPassword.getText());
-        u.setUserRole("client");
+        String UserRole ="['ROLE_USER']";
+        JSONArray arrayRole = new JSONArray(UserRole); 
+        u.setUserRole(arrayRole);
         u.setUserStatus(1);
         //u.setPasswordUser(Password.getText());
         IClient Ic = new ClientService();
