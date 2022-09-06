@@ -6,12 +6,13 @@ package Services;
 
 import Interfaces.IPanier;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import Models.Panier;
 import Models.PanierEntry;
 import Models.Product;
@@ -21,10 +22,11 @@ import Utils.maConnexion;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import sun.font.EAttribute;
-import sun.jvm.hotspot.HSDB;
+
+
 
 /**
  *
@@ -126,12 +128,17 @@ public class PanierService implements IPanier {
             while (resultSet.next()) {
                 productId = resultSet.getString("id_produit");
                 quantity = Integer.valueOf(resultSet.getString("Quantity"));
+
+                LocalDate localDate = LocalDate.parse(resultSet.getString("datePanier"));
+                ZoneId defaultZoneId = ZoneId.systemDefault();
+                Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+
                 PreparedStatement ps = conn.prepareStatement("SELECT * from produit WHERE id = ?");
                 ps.setString(1, productId);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     product = Product.valueOf(rs.getString("name"));
-                    PanierEntry entry = new PanierEntry(product, quantity);
+                    PanierEntry entry = new PanierEntry(product, quantity,date);
                     Panier.getInstance().getEntries().put(rs.getString("name"), entry);
                 }
             }
@@ -170,7 +177,7 @@ public class PanierService implements IPanier {
     }
 
     @Override
-    public void passerCommande(User user, float totale, Date sqlDate) {
+    public void passerCommande(User user, float totale, java.sql.Date sqlDate) {
 
         try {
             conn = DbUtils.getInstance().getConnection();
@@ -329,6 +336,39 @@ public class PanierService implements IPanier {
                 }
             }
             return new ArrayList<>(Panier.getInstance().getEntries().values());
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Panier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ArrayList<>();
+    }
+    
+    public List<Panier> getPanierbyUser(User user){
+         
+
+        ArrayList<Panier> userCart= new ArrayList<>();
+
+        try {
+            conn = DbUtils.getInstance().getConnection();
+            //conn = maConnexion.getInstance().getCnx();
+            preparedStatement = conn.prepareStatement("SELECT * from panier p WHERE  p.id_user= ? ");
+            preparedStatement.setString(1, String.valueOf(user.getIdUser()));
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                float totale = Float.valueOf(resultSet.getString("total"));
+                String etat = resultSet.getString("etat");
+                
+                LocalDate localDate = LocalDate.parse(resultSet.getString("datePanier"));
+                ZoneId defaultZoneId = ZoneId.systemDefault();
+                Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+                Panier panier = new Panier();
+                panier.setDateCreation(date);
+                panier.setEtat(etat);
+                panier.setTotale(totale);
+                userCart.add(panier);
+                  
+            }
+            return userCart;
 
         } catch (SQLException ex) {
             Logger.getLogger(Panier.class.getName()).log(Level.SEVERE, null, ex);

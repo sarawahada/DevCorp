@@ -32,7 +32,9 @@ public class Panier {
         return INSTANCE;
     }
     private Map<String, PanierEntry> entries;
-
+    private Date dateCreation;
+    private String etat;
+    private float totale;
     public Panier() {
         this.entries = new HashMap<>();
     }
@@ -45,4 +47,27 @@ public class Panier {
         this.entries = entries;
     }
 
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    public float getTotale() {
+        return totale;
+    }
+
+    public void setTotale(float totale) {
+        this.totale = totale;
+    }
 }

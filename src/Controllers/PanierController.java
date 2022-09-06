@@ -92,8 +92,8 @@ public class PanierController implements Initializable {
                     PanierPane.getChildren().add(totaleView);
 
                     // Create the Status Box
-                    HBox jobStatusBox = new HBox(5, new Label("Job Status: "), jobStatus);
-                    PanierPane.getChildren().add(jobStatusBox);
+                    /*HBox jobStatusBox = new HBox(5, new Label("Job Status: "), jobStatus);
+                    PanierPane.getChildren().add(jobStatusBox)*/;
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -127,8 +127,8 @@ public class PanierController implements Initializable {
                     
                     
                     // Create the Status Box
-                    HBox jobStatusBox = new HBox(5, new Label("Job Status: "), jobStatus);
-                    PanierPane.getChildren().add(jobStatusBox);
+                    /*HBox jobStatusBox = new HBox(5, new Label("Job Status: "), jobStatus);
+                    PanierPane.getChildren().add(jobStatusBox);*/
                 } catch (SQLException ex) {
                     Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
                 }
